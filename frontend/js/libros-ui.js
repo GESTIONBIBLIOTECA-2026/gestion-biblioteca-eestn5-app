@@ -27,10 +27,12 @@ export function crearTarjetaLibroHTML(libro) {
     const [texto, clase] = estadoLibro(libro);
     const hayStock = libro.stock_reservable > 0;
     const detalle = [libro.categoria, libro.editorial, libro.anio].filter(Boolean).map(escapar).join(" · ");
+    // Si el libro tiene portada, la imagen se dibuja encima del ícono; si no carga, se sigue viendo el ícono
+    const portada = libro.portada_url ? `<img src="${escapar(libro.portada_url)}" alt="" loading="lazy" referrerpolicy="no-referrer">` : "";
 
     return `
         <article class="tarjeta-libro">
-            <div class="tarjeta-libro-portada"><i data-lucide="book-open"></i></div>
+            <div class="tarjeta-libro-portada"><i data-lucide="book-open"></i>${portada}</div>
             <div class="tarjeta-libro-info">
                 <h3>${escapar(libro.titulo)}</h3>
                 <p>${escapar(libro.autores ?? "Sin autor")}</p>

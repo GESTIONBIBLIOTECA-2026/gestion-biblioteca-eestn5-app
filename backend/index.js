@@ -1,10 +1,9 @@
 /* ==========================================================================
-   index.js - Servidor Express · Biblioteca Invaluable App (Grupo 5)
-   API de la PWA para alumnos y docentes (sin panel de administración)
+   index.js - Servidor Express · Biblioteca Invaluable App & Panel
    Circuito:  index.js ➔ Router ➔ Controller ➔ Model ➔ MySQL
    ========================================================================== */
 
-// 1. Frameworks, configuración y rutas (config.js frena todo si falta algo en el .env)
+// 1. Frameworks, configuración y rutas
 import express from "express";
 import cors from "cors";
 import { PORT, CARPETA_BACKEND } from "./src/config/config.js";
@@ -12,17 +11,27 @@ import connection, { comprobarConexion } from "./src/database/db.js";
 import authRoutes from "./src/routes/auth.routes.js";
 import perfilRoutes from "./src/routes/perfil.routes.js";
 import librosRoutes from "./src/routes/libros.routes.js";
+import usuariosRoutes from "./src/routes/usuarios.routes.js";
+import cursosRoutes from "./src/routes/cursos.routes.js";
+import prestamosRoutes from "./src/routes/prestamos.routes.js";
+import misPedidosRoutes from "./src/routes/mis-pedidos.routes.js";
+import dashboardRoutes from "./src/routes/dashboard.routes.js";
 
 // 2. Aplicación y middlewares globales
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.use(express.static(`${CARPETA_BACKEND}../frontend`));   // la app se abre en http://localhost:3000
+app.use(express.static(`${CARPETA_BACKEND}../frontend`));   // app y panel en http://localhost:3000
 
 // 3. Rutas de la API
 app.use("/api/auth", authRoutes);
 app.use("/api/perfil", perfilRoutes);
 app.use("/api/libros", librosRoutes);
+app.use("/api/usuarios", usuariosRoutes);
+app.use("/api/cursos", cursosRoutes);
+app.use("/api/prestamos", prestamosRoutes);
+app.use("/api/mis-pedidos", misPedidosRoutes);
+app.use("/api/dashboard", dashboardRoutes);
 
 // 4. Ruta de la API que no existe → 404
 app.use("/api", (req, res) => res.status(404).json({ error: "Ruta no encontrada" }));

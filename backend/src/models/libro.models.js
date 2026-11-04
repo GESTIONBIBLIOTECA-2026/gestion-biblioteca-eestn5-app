@@ -40,3 +40,18 @@ export const getCategorias = async () => {
     const [rows] = await connection.query("SELECT id, nombre FROM categorias ORDER BY nombre");
     return rows;
 };
+
+// Catálogo consultable para el módulo de pedidos (Grupo 4)
+export const listarLibrosParaPedido = async (busqueda = "") => {
+    const termino = `%${String(busqueda).trim()}%`;
+    const [rows] = await connection.query(
+        `SELECT libro_id, isbn, titulo, categoria, autores, portada_url,
+                ejemplares_totales, ejemplares_disponibles, cantidad_reservada,
+                stock_reservable, estado_visual
+         FROM vista_stock_libros
+         WHERE ? = '' OR titulo LIKE ? OR autores LIKE ? OR categoria LIKE ? OR isbn LIKE ?
+         ORDER BY titulo ASC LIMIT 500`,
+        [String(busqueda).trim(), termino, termino, termino, termino]
+    );
+    return rows;
+};
