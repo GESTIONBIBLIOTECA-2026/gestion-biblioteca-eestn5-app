@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="es" class="verificando-sesion">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mi biblioteca - Biblioteca Invaluable</title>
+
+    <!-- PWA (clase 07): manifiesto, color de la barra de estado y soporte para iOS -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0b1329">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Biblioteca">
+    <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+
+    <!-- Tema claro / oscuro (va primero para que no parpadee) -->
+    <script src="js/tema.js"></script>
+
+    <!-- Estilos generales + base del inicio (tabla, estados y accesos rápidos) -->
+    <link rel="stylesheet" href="css/estilo-general.css">
+    <link rel="stylesheet" href="css/inicio-base.css">
+
+    <!-- Estilos exclusivos del inicio de alumnos y docentes -->
+    <link rel="stylesheet" href="css/inicio-usuario.css">
+
+    <!-- Fuente Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Iconos Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+
+    <!-- En Inicio el menú lateral queda desplegado -->
+    <div class="layout-dashboard">
+
+        <!-- BARRA LATERAL (menú de alumnos y docentes) -->
+        <aside class="sidebar">
+
+            <a href="inicio-usuario.html" class="sidebar-logo" aria-label="Ir al inicio">
+
+                <div class="sidebar-logo-icono">
+                    <i data-lucide="book-open"></i>
+                </div>
+
+                <div class="sidebar-logo-texto">
+                    <h2>BIBLIOTECA</h2>
+                    <p>INVALUABLE</p>
+                </div>
+
+            </a>
+
+            <nav class="sidebar-nav" aria-label="Menú principal">
+
+                <a href="inicio-usuario.html" class="nav-item activo" aria-current="page" title="Inicio">
+                    <i data-lucide="house"></i>
+                    <span>Inicio</span>
+                </a>
+
+                <a href="catalogo.html" class="nav-item" title="Catálogo">
+                    <i data-lucide="book"></i>
+                    <span>Catálogo</span>
+                </a>
+
+                <a href="configuracion.html" class="nav-item" title="Configuración">
+                    <i data-lucide="settings"></i>
+                    <span>Configuración</span>
+                </a>
+
+            </nav>
+
+        </aside>
+
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <div class="contenido-principal">
+
+            <!-- ENCABEZADO SUPERIOR -->
+            <header class="encabezado-superior">
+
+                <p class="titulo-encabezado">Mi biblioteca</p>
+
+                <div class="encabezado-derecha">
+
+                    <!-- INSTALAR LA APP (PWA · js/pwa.js): oculto hasta que el navegador lo permite -->
+                    <button type="button" id="btn-instalar-app" class="boton-principal boton-instalar" hidden>
+                        <i data-lucide="download"></i>
+                        <span>Instalar app</span>
+                    </button>
+
+                    <div class="info-fecha-hora">
+
+                        <div class="item-fecha-hora">
+                            <i data-lucide="calendar"></i>
+                            <span data-fecha-hoy></span>
+                        </div>
+
+                        <div class="item-fecha-hora">
+                            <i data-lucide="clock"></i>
+                            <span id="reloj-actual">--:--</span>
+                        </div>
+
+                    </div>
+
+                    <!-- MENÚ DEL PERFIL (js/sesion.js) -->
+                    <div class="menu-perfil" data-menu-perfil>
+
+                        <button
+                            type="button"
+                            class="usuario-perfil"
+                            data-abrir-menu-perfil
+                            aria-haspopup="menu"
+                            aria-expanded="false"
+                            aria-controls="menuPerfil"
+                        >
+                            <span class="avatar-usuario">
+                                <i data-lucide="user-round"></i>
+                            </span>
+
+                            <span class="nombre-perfil" data-nombre-usuario>Usuario</span>
+
+                            <i data-lucide="chevron-down" class="flecha-perfil"></i>
+                        </button>
+
+                        <div class="menu-perfil-lista" id="menuPerfil" role="menu" aria-label="Opciones del perfil" hidden>
+
+                            <div class="menu-perfil-cabecera">
+                                <strong data-nombre-usuario>Usuario</strong>
+                                <span data-rol-usuario>Alumno</span>
+                            </div>
+
+                            <a href="configuracion.html" class="menu-perfil-opcion" role="menuitem">
+                                <i data-lucide="user-cog"></i>
+                                <span class="texto-opcion">Ajustes del perfil</span>
+                            </a>
+
+                            <!-- Apariencia: el switch cambia entre luna (oscuro) y sol (claro) -->
+                            <button
+                                type="button"
+                                class="menu-perfil-opcion"
+                                role="menuitemcheckbox"
+                                aria-checked="false"
+                                aria-label="Apariencia: modo claro"
+                                data-cambiar-tema
+                            >
+                                <i data-lucide="palette"></i>
+                                <span class="texto-opcion">Apariencia</span>
+                                <span class="switch-tema" aria-hidden="true">
+                                    <i data-lucide="moon" class="switch-tema-fondo fondo-luna"></i>
+                                    <i data-lucide="sun" class="switch-tema-fondo fondo-sol"></i>
+                                    <span class="switch-tema-perilla">
+                                        <i data-lucide="moon" data-icono-tema="oscuro"></i>
+                                        <i data-lucide="sun" data-icono-tema="claro"></i>
+                                    </span>
+                                </span>
+                            </button>
+
+                            <hr class="menu-perfil-separador">
+
+                            <button type="button" class="menu-perfil-opcion peligro" role="menuitem" data-cerrar-sesion>
+                                <i data-lucide="log-out"></i>
+                                <span class="texto-opcion">Cerrar sesión</span>
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <!-- CONTENIDO: lo completa js/inicio-usuario.js con GET /api/perfil/historial -->
+            <main class="contenedor pagina-usuario">
+
+                <!-- SALUDO -->
+                <section class="bienvenida">
+                    <p class="bienvenida-colegio">Biblioteca E.E.S.T. N° 5</p>
+                    <h1>Hola, <span id="nombreSaludo">...</span></h1>
+                    <p id="textoBienvenida">Cargando tu cuenta...</p>
+                </section>
+
+                <!-- AVISO IMPORTANTE (suspensión, atraso o vencimiento cercano) -->
+                <div class="aviso-cuenta" id="avisoCuenta" role="alert" hidden></div>
+
+
+                <div class="grid-usuario">
+
+                    <!-- CREDENCIAL DIGITAL -->
+                    <section class="credencial" id="credencial" aria-labelledby="tituloCredencial">
+
+                        <div class="credencial-cabecera">
+                            <span><i data-lucide="id-card"></i> Credencial digital</span>
+                            <span class="estado-cuenta" id="estadoCuenta">—</span>
+                        </div>
+
+                        <div class="credencial-cuerpo">
+                            <div>
+                                <h2 id="tituloCredencial">—</h2>
+                                <p id="credencialDetalle">—</p>
+                                <p class="credencial-dni">DNI <strong id="credencialDni">—</strong></p>
+                            </div>
+                        </div>
+
+                        <dl class="credencial-datos" id="credencialDatos"></dl>
+
+                        <p class="credencial-pie">Mostrá esta credencial en el mostrador para retirar o devolver libros.</p>
+
+                    </section>
+
+
+                    <div class="columna-resumen">
+
+                        <!-- NÚMEROS DE MI CUENTA -->
+                        <section class="metricas-usuario" id="metricas" aria-label="Resumen de tu cuenta"></section>
+
+                        <!-- ACCESOS RÁPIDOS -->
+                        <section class="tarjeta-acciones-rapidas" aria-labelledby="titulo-acciones">
+
+                            <div class="acciones-header">
+                                <h3 id="titulo-acciones">Accesos rápidos</h3>
+                            </div>
+
+                            <div class="rejilla-acciones-mini">
+
+                                <!-- El catálogo es del Grupo 6 -->
+                                <a href="catalogo.html" class="accion-mini">
+                                    <div class="accion-mini-icono"><i data-lucide="search"></i></div>
+                                    <span>Buscar libros</span>
+                                </a>
+
+                                <a href="#devoluciones" class="accion-mini">
+                                    <div class="accion-mini-icono"><i data-lucide="book-down"></i></div>
+                                    <span>Mis devoluciones</span>
+                                </a>
+
+                                <a href="#historial" class="accion-mini">
+                                    <div class="accion-mini-icono"><i data-lucide="history"></i></div>
+                                    <span>Mi historial</span>
+                                </a>
+
+                                <a href="configuracion.html" class="accion-mini">
+                                    <div class="accion-mini-icono"><i data-lucide="user-pen"></i></div>
+                                    <span>Mis datos y contraseña</span>
+                                </a>
+
+                            </div>
+
+                        </section>
+
+                    </div>
+
+                </div>
+
+
+                <!-- DEVOLUCIONES PENDIENTES (préstamos en mi poder) -->
+                <section class="tarjeta-usuario" id="devoluciones" aria-labelledby="tituloDevoluciones">
+
+                    <div class="encabezado-prestamos">
+                        <h2 id="tituloDevoluciones">Devoluciones pendientes</h2>
+                        <span class="contador-seccion" id="contadorDevoluciones">0</span>
+                    </div>
+
+                    <ul class="lista-prestamos" id="listaDevoluciones">
+                        <li class="lista-vacia">Cargando préstamos...</li>
+                    </ul>
+
+                </section>
+
+
+                <!-- RESERVAS PARA RETIRAR (solo si hay) -->
+                <section class="tarjeta-usuario" id="reservas" aria-labelledby="tituloReservas" hidden>
+
+                    <div class="encabezado-prestamos">
+                        <h2 id="tituloReservas">Reservas para retirar</h2>
+                        <span class="contador-seccion" id="contadorReservas">0</span>
+                    </div>
+
+                    <ul class="lista-prestamos" id="listaReservas"></ul>
+
+                </section>
+
+
+                <!-- HISTORIAL DE PRÉSTAMOS -->
+                <section class="tarjeta-prestamos" id="historial" aria-labelledby="tituloHistorial">
+
+                    <div class="encabezado-prestamos">
+                        <h2 id="tituloHistorial">Historial de préstamos</h2>
+                    </div>
+
+                    <!-- Filtros (js: data-filtro) -->
+                    <div class="filtros-historial" id="filtrosHistorial" role="group" aria-label="Filtrar historial">
+                        <button type="button" class="activo" data-filtro="todos">Todos <span data-cantidad="todos">0</span></button>
+                        <button type="button" data-filtro="en_curso">En curso <span data-cantidad="en_curso">0</span></button>
+                        <button type="button" data-filtro="devueltos">Devueltos <span data-cantidad="devueltos">0</span></button>
+                        <button type="button" data-filtro="atrasos">Con atraso <span data-cantidad="atrasos">0</span></button>
+                    </div>
+
+                    <div class="contenedor-tabla">
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th scope="col">Libro</th>
+                                    <th scope="col">Retirado</th>
+                                    <th scope="col">Vencimiento</th>
+                                    <th scope="col">Devuelto</th>
+                                    <th scope="col">Estado</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="cuerpoHistorial">
+                                <tr>
+                                    <td colspan="5" class="celda-mensaje">Cargando historial...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </section>
+
+
+                <!-- SANCIONES (solo si tuvo alguna) -->
+                <section class="tarjeta-usuario" id="sanciones" aria-labelledby="tituloSanciones" hidden>
+
+                    <div class="encabezado-prestamos">
+                        <h2 id="tituloSanciones">Sanciones</h2>
+                    </div>
+
+                    <ul class="lista-prestamos" id="listaSanciones"></ul>
+
+                </section>
+
+            </main>
+
+        </div>
+
+    </div>
+
+
+    <!-- SESIÓN, MENÚ SEGÚN EL ROL Y ENCABEZADO -->
+    <script type="module" src="js/sesion.js"></script>
+
+    <!-- MI CUENTA: credencial, préstamos, reservas e historial -->
+    <script type="module" src="js/inicio-usuario.js"></script>
+
+    <!-- ICONOS -->
+    <!-- PWA: registro del Service Worker y botón "Instalar app" -->
+    <script src="js/pwa.js"></script>
+
+    <script>
+        window.lucide?.createIcons();
+    </script>
+
+</body>
+
+</html>

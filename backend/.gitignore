@@ -1,0 +1,10 @@
+# Variables de entorno
+.env
+backend/.env
+
+# Certificados
+ca.pem
+backend/ca.pem
+
+# Dependencias
+node_modules/

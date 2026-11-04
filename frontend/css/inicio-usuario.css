@@ -1,0 +1,556 @@
+/* =========================================================
+   INICIO DE ALUMNOS Y DOCENTES (inicio-usuario.html)
+   Reutiliza variables y layout de estilo-general.css y la tabla,
+   los estados y los accesos rápidos de index.css.
+========================================================= */
+
+/* --- Ámbar: "vence pronto" (warning de la guía de estilos) --- */
+:root {
+    --ambar-texto: #fbbf24;
+    --ambar-fondo: rgba(217, 119, 6, .14);
+    --ambar-borde: rgba(217, 119, 6, .45);
+}
+
+.modo-claro {
+    --ambar-texto: #b45309;
+    --ambar-fondo: #fef3c7;
+    --ambar-borde: #fcd34d;
+}
+
+.pagina-usuario {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+
+/* --- SALUDO --- */
+.bienvenida-colegio {
+    color: var(--azul-500);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .6px;
+    text-transform: uppercase;
+}
+
+.bienvenida h1 {
+    color: var(--texto-fuerte);
+    font-size: clamp(25px, 3vw, 32px);
+    line-height: 1.2;
+    margin: 4px 0 6px;
+}
+
+.bienvenida p:last-child {
+    color: var(--texto-secundario);
+    font-size: 14px;
+}
+
+
+/* --- AVISO DE LA CUENTA --- */
+.aviso-cuenta:not([hidden]) {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 18px;
+    border: 1px solid;
+    border-radius: 12px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.aviso-cuenta svg {
+    flex: 0 0 20px;
+    width: 20px;
+    height: 20px;
+    margin-top: 1px;
+}
+
+.aviso-cuenta.peligro { color: var(--bordo-texto); background: var(--bordo-fondo); border-color: var(--bordo-borde); }
+.aviso-cuenta.aviso { color: var(--ambar-texto); background: var(--ambar-fondo); border-color: var(--ambar-borde); }
+
+
+/* --- GRILLA: credencial | números + accesos --- */
+.grid-usuario {
+    display: grid;
+    grid-template-columns: minmax(300px, 380px) 1fr;
+    gap: 24px;
+}
+
+.columna-resumen {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    min-width: 0;
+}
+
+
+/* --- CREDENCIAL DIGITAL --- */
+.credencial {
+    align-self: start;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding: 22px;
+    border: 1px solid var(--borde-tarjeta);
+    border-top: 4px solid var(--azul-400);
+    border-radius: 12px;
+    background: var(--fondo-tarjeta);
+    box-shadow: var(--sombra-tarjeta);
+    scroll-margin-top: 90px;
+}
+
+.credencial-cabecera {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    color: var(--texto-secundario);
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+}
+
+.credencial-cabecera > span:first-child {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.credencial-cabecera svg {
+    width: 17px;
+    height: 17px;
+    color: var(--azul-500);
+}
+
+.credencial-cuerpo {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.credencial h2 {
+    color: var(--texto-fuerte);
+    font-size: 18px;
+    line-height: 1.25;
+}
+
+.credencial-cuerpo p {
+    margin-top: 4px;
+    color: var(--texto-secundario);
+    font-size: 13px;
+}
+
+.credencial-dni strong {
+    color: var(--texto-fuerte);
+    font-size: 15px;
+    letter-spacing: .5px;
+}
+
+.credencial-datos {
+    display: grid;
+    gap: 10px;
+    padding-top: 16px;
+    border-top: 1px solid var(--borde-tarjeta);
+    font-size: 13px;
+}
+
+.credencial-datos div {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.credencial-datos dt {
+    color: var(--texto-mutado);
+}
+
+.credencial-datos dd {
+    color: var(--texto-principal);
+    text-align: right;
+    overflow-wrap: anywhere;
+}
+
+.credencial-pie {
+    padding: 10px 12px;
+    border-radius: 8px;
+    background: var(--superficie-sutil);
+    color: var(--texto-mutado);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+
+/* --- NÚMEROS DE LA CUENTA --- */
+.metricas-usuario {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.metrica {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 18px;
+    border: 1px solid var(--borde-tarjeta);
+    border-radius: 12px;
+    background: var(--fondo-tarjeta);
+    box-shadow: var(--sombra-tarjeta);
+}
+
+.metrica-icono {
+    width: 36px;
+    height: 36px;
+    display: grid;
+    place-items: center;
+    margin-bottom: 8px;
+    border-radius: 9px;
+    background: var(--azul-suave);
+    color: var(--azul-500);
+}
+
+.metrica-icono svg {
+    width: 18px;
+    height: 18px;
+}
+
+.metrica h3 {
+    color: var(--texto-secundario);
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.metrica strong {
+    color: var(--texto-fuerte);
+    font-size: 28px;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.metrica p {
+    color: var(--texto-mutado);
+    font-size: 12px;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+}
+
+.metrica.atrasado { border-left: 4px solid var(--rojo-500); }
+.metrica.atrasado .metrica-icono { background: var(--rojo-fondo); color: var(--rojo-500); }
+.metrica.aviso { border-left: 4px solid var(--ambar-texto); }
+.metrica.aviso .metrica-icono { background: var(--ambar-fondo); color: var(--ambar-texto); }
+.metrica.en-curso .metrica-icono { background: var(--verde-fondo); color: var(--verde-600); }
+
+
+/* --- TARJETAS DE LISTAS (devoluciones, reservas, sanciones) --- */
+.tarjeta-usuario {
+    padding: 24px;
+    border: 1px solid var(--borde-tarjeta);
+    border-radius: 12px;
+    background: var(--fondo-tarjeta);
+    box-shadow: var(--sombra-tarjeta);
+    scroll-margin-top: 90px;
+}
+
+.tarjeta-prestamos {
+    scroll-margin-top: 90px;
+}
+
+.contador-seccion {
+    min-width: 28px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: var(--superficie-activa);
+    color: var(--texto-secundario);
+    font-size: 12px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.lista-prestamos {
+    display: grid;
+    gap: 10px;
+    list-style: none;
+}
+
+.lista-vacia {
+    padding: 18px;
+    border: 1px dashed var(--borde-tarjeta);
+    border-radius: 10px;
+    color: var(--texto-mutado);
+    font-size: 13px;
+    text-align: center;
+}
+
+.prestamo {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 16px;
+    border: 1px solid var(--borde-tarjeta);
+    border-left: 4px solid var(--verde-600);
+    border-radius: 10px;
+    background: var(--superficie-sutil);
+}
+
+.prestamo.aviso { border-left-color: var(--ambar-texto); }
+.prestamo.atrasado { border-left-color: var(--rojo-500); }
+.prestamo.reserva { border-left-color: var(--azul-400); }
+.prestamo.devuelto { border-left-color: var(--borde-tarjeta); }
+
+/* Cuenta regresiva: número grande de días */
+.prestamo-plazo {
+    flex: 0 0 64px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--verde-600);
+    text-align: center;
+}
+
+.prestamo-plazo strong {
+    font-size: 26px;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.prestamo-plazo span {
+    margin-top: 4px;
+    color: var(--texto-mutado);
+    font-size: 11px;
+}
+
+.prestamo-plazo svg {
+    width: 22px;
+    height: 22px;
+}
+
+.prestamo.aviso .prestamo-plazo { color: var(--ambar-texto); }
+.prestamo.atrasado .prestamo-plazo { color: var(--rojo-500); }
+.prestamo.reserva .prestamo-plazo { color: var(--azul-500); }
+.prestamo.devuelto .prestamo-plazo { color: var(--texto-mutado); }
+
+.prestamo-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.prestamo-info strong {
+    display: block;
+    color: var(--texto-fuerte);
+    font-size: 14px;
+}
+
+.prestamo-info > span {
+    display: block;
+    margin-top: 3px;
+    color: var(--texto-secundario);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.prestamo-info b {
+    color: var(--texto-principal);
+}
+
+/* Barra del plazo: cuánto del tiempo del préstamo ya pasó */
+.barra-plazo {
+    height: 5px;
+    margin-top: 10px;
+    border-radius: 999px;
+    background: var(--superficie-activa);
+    overflow: hidden;
+}
+
+.barra-plazo span {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: var(--verde-600);
+}
+
+.prestamo.aviso .barra-plazo span { background: var(--ambar-texto); }
+.prestamo.atrasado .barra-plazo span { background: var(--rojo-500); }
+
+.prestamo .estado {
+    flex-shrink: 0;
+    font-style: normal;
+    white-space: nowrap;
+}
+
+
+/* --- ESTADOS EXTRA (se suman a los de index.css) --- */
+.estado.aviso {
+    background: var(--ambar-fondo);
+    color: var(--ambar-texto);
+    border: 1px solid var(--ambar-borde);
+}
+
+.estado.reserva {
+    background: var(--azul-suave);
+    color: var(--azul-500);
+    border: 1px solid var(--azul-suave-borde);
+}
+
+
+/* --- HISTORIAL: filtros y tabla --- */
+.filtros-historial {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 14px;
+}
+
+.filtros-historial button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 12px;
+    border: 1px solid var(--borde-tarjeta);
+    border-radius: 8px;
+    background: transparent;
+    color: var(--texto-secundario);
+    font: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.filtros-historial button span {
+    min-width: 20px;
+    padding: 1px 6px;
+    border-radius: 6px;
+    background: var(--superficie-activa);
+    font-size: 10px;
+}
+
+.filtros-historial button:hover {
+    border-color: var(--azul-400);
+    color: var(--texto-principal);
+}
+
+.filtros-historial button.activo {
+    background: var(--azul-suave);
+    border-color: var(--azul-400);
+    color: var(--texto-fuerte);
+}
+
+.filtros-historial button.activo span {
+    background: var(--azul-700);
+    color: var(--blanco);
+}
+
+.filtros-historial button:focus-visible {
+    outline: 2px solid var(--azul-500);
+    outline-offset: 2px;
+}
+
+/* En el celular la tabla se desliza de costado en vez de apretar las columnas */
+#historial table {
+    min-width: 620px;
+}
+
+#cuerpoHistorial strong {
+    color: var(--texto-fuerte);
+    font-weight: 600;
+}
+
+#cuerpoHistorial .cantidad {
+    display: block;
+    margin-top: 2px;
+    color: var(--texto-mutado);
+    font-size: 11px;
+}
+
+
+/* --- RESPONSIVE --- */
+@media (max-width: 1280px) {
+    .metricas-usuario {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 1100px) {
+    .grid-usuario {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .tarjeta-usuario {
+        padding: 18px;
+    }
+
+    .prestamo {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .prestamo-plazo {
+        flex-basis: 48px;
+    }
+
+    .prestamo-info {
+        flex-basis: calc(100% - 64px);
+    }
+
+    .prestamo .estado {
+        margin-left: 60px;
+    }
+
+    .rejilla-acciones-mini {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Historial: cada préstamo pasa a ser una tarjeta (sin scroll de costado) */
+    #historial table {
+        min-width: 0;
+    }
+
+    #historial thead {
+        display: none;
+    }
+
+    #cuerpoHistorial tr {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px 12px;
+        padding: 14px 0;
+    }
+
+    #cuerpoHistorial td {
+        padding: 0;
+        font-size: 12px;
+    }
+
+    #cuerpoHistorial td:first-child,
+    #cuerpoHistorial td:last-child,
+    #cuerpoHistorial td[colspan] {
+        grid-column: 1 / -1;
+    }
+
+    #cuerpoHistorial td:first-child strong {
+        font-size: 14px;
+    }
+
+    /* Nombre de cada columna arriba del dato (reemplaza al encabezado oculto) */
+    #cuerpoHistorial td:nth-child(2)::before { content: "Retirado"; }
+    #cuerpoHistorial td:nth-child(3)::before { content: "Vencimiento"; }
+    #cuerpoHistorial td:nth-child(4)::before { content: "Devuelto"; }
+
+    #cuerpoHistorial td:not([colspan])::before {
+        display: block;
+        margin-bottom: 2px;
+        color: var(--texto-mutado);
+        font-size: 10px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: .5px;
+    }
+}
+
+@media (max-width: 380px) {
+    .metricas-usuario {
+        grid-template-columns: 1fr;
+    }
+}

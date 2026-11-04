@@ -1,0 +1,219 @@
+/* =========================================================
+   COMPONENTES COMPARTIDOS
+   Piezas que usan el catálogo y la configuración: título de
+   página, paneles, filtros del buscador y etiquetas de estado.
+   Usa las variables de estilo-general.css (tema claro / oscuro).
+========================================================= */
+
+.pagina {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+
+/* --- 1. Título de la página + acción principal --- */
+
+.encabezado-pagina {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.encabezado-pagina h1 {
+    color: var(--texto-principal);
+    font-size: clamp(25px, 3vw, 32px);
+    line-height: 1.2;
+    margin-bottom: 8px;
+}
+
+.encabezado-pagina p {
+    color: var(--texto-secundario);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+/* --- 2. Paneles --- */
+
+.panel {
+    min-width: 0;
+    overflow: hidden;
+    background: var(--fondo-tarjeta);
+    border: 1px solid var(--borde-tarjeta);
+    border-radius: 12px;
+    box-shadow: var(--sombra-tarjeta);
+}
+
+.panel-cabecera {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 22px 24px;
+    border-bottom: 1px solid var(--borde-tarjeta);
+}
+
+.panel-titulo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 0;
+}
+
+.panel-icono {
+    display: grid;
+    place-items: center;
+    flex: 0 0 40px;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    color: var(--azul-500);
+    background: var(--azul-suave);
+}
+
+.panel-icono svg {
+    width: 20px;
+    height: 20px;
+}
+
+.panel-cabecera h2 {
+    color: var(--texto-principal);
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.panel-cabecera p {
+    margin-top: 5px;
+    color: var(--texto-secundario);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.contador-panel {
+    display: inline-grid;
+    place-items: center;
+    min-width: 24px;
+    height: 22px;
+    margin-left: 8px;
+    padding: 0 7px;
+    border-radius: 6px;
+    background: var(--superficie-activa);
+    color: var(--texto-secundario);
+    font-size: 11px;
+    vertical-align: middle;
+}
+
+.panel-vacio {
+    padding: 28px 24px;
+    color: var(--texto-mutado);
+    font-size: 13px;
+    font-style: italic;
+    text-align: center;
+}
+
+
+/* --- 3. Filtros del buscador --- */
+
+.filtro {
+    width: 100%;
+    min-width: 0;
+    height: 42px;
+    padding: 0 12px;
+    border: 1px solid var(--borde-tarjeta);
+    border-radius: 8px;
+    outline: none;
+    background: var(--fondo-campo);
+    color: var(--texto-principal);
+    font: inherit;
+    font-size: 13px;
+    transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+.filtro::placeholder {
+    color: var(--texto-mutado);
+}
+
+.filtro:focus {
+    border-color: var(--azul-400);
+    box-shadow: 0 0 0 3px var(--azul-suave);
+}
+
+/* Barra de búsqueda: el primer campo se estira */
+.barra-filtros {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--borde-tarjeta);
+}
+
+.barra-filtros > .filtro { flex: 1 1 160px; }
+.barra-filtros > .filtro.ancho { flex: 3 1 240px; }
+.barra-filtros > button { min-height: 42px; white-space: nowrap; }
+
+.casilla {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--texto-secundario);
+    font-size: 13px;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.casilla input {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--azul-700);
+}
+
+
+/* --- 4. Etiquetas de estado (texto + color: nunca solo color) --- */
+
+.etiqueta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 9px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.etiqueta::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+}
+
+.etiqueta.verde  { color: var(--verde-600); background: var(--verde-fondo); }
+.etiqueta.azul   { color: var(--azul-500); background: var(--azul-suave); }
+.etiqueta.rojo   { color: var(--rojo-500); background: var(--rojo-fondo); }
+.etiqueta.ambar  { color: #f59e0b; background: rgba(245, 158, 11, .12); }
+.etiqueta.gris   { color: var(--texto-secundario); background: var(--superficie-activa); }
+
+.modo-claro .etiqueta.ambar { color: #b45309; background: #fef3c7; }
+
+
+/* --- 5. Responsive --- */
+
+@media (max-width: 760px) {
+    .panel-cabecera,
+    .barra-filtros {
+        padding: 16px 18px;
+    }
+
+    .barra-filtros > button { flex: 1 1 auto; }
+}
+
+@media (max-width: 480px) {
+    .barra-filtros > .filtro { flex-basis: 100%; }
+}

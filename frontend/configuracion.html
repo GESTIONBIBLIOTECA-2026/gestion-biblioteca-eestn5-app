@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="es" class="verificando-sesion">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Configuración - Biblioteca Invaluable</title>
+
+    <!-- PWA (clase 07): manifiesto, color de la barra de estado y soporte para iOS -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0b1329">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Biblioteca">
+    <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+
+    <!-- Tema claro / oscuro (va primero para que no parpadee) -->
+    <script src="js/tema.js"></script>
+
+    <!-- Estilos generales -->
+    <link rel="stylesheet" href="css/estilo-general.css">
+
+    <!-- Estilos exclusivos de configuración -->
+    <link rel="stylesheet" href="css/configuracion.css">
+
+    <!-- Fuente Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Iconos Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+
+    <!-- menu-compacto: el menú lateral muestra solo los íconos hasta pasar el mouse -->
+    <div class="layout-dashboard menu-compacto">
+
+        <!-- BARRA LATERAL -->
+        <aside class="sidebar">
+
+            <a href="inicio-usuario.html" class="sidebar-logo" aria-label="Ir al inicio">
+
+                <div class="sidebar-logo-icono">
+                    <i data-lucide="book-open"></i>
+                </div>
+
+                <div class="sidebar-logo-texto">
+                    <h2>BIBLIOTECA</h2>
+                    <p>INVALUABLE</p>
+                </div>
+
+            </a>
+
+            <nav class="sidebar-nav" aria-label="Menú principal">
+
+                <a href="inicio-usuario.html" class="nav-item" title="Inicio">
+                    <i data-lucide="house"></i>
+                    <span>Inicio</span>
+                </a>
+
+                <a href="catalogo.html" class="nav-item" title="Catálogo">
+                    <i data-lucide="book"></i>
+                    <span>Catálogo</span>
+                </a>
+
+                <a href="configuracion.html" class="nav-item activo" aria-current="page" title="Configuración">
+                    <i data-lucide="settings"></i>
+                    <span>Configuración</span>
+                </a>
+
+            </nav>
+
+        </aside>
+
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <div class="contenido-principal">
+
+            <!-- ENCABEZADO SUPERIOR -->
+            <header class="encabezado-superior">
+
+                <p class="titulo-encabezado">Mi biblioteca</p>
+
+                <div class="encabezado-derecha">
+
+                    <!-- INSTALAR LA APP (PWA · js/pwa.js): oculto hasta que el navegador lo permite -->
+                    <button type="button" id="btn-instalar-app" class="boton-principal boton-instalar" hidden>
+                        <i data-lucide="download"></i>
+                        <span>Instalar app</span>
+                    </button>
+
+                    <div class="info-fecha-hora">
+
+                        <div class="item-fecha-hora">
+                            <i data-lucide="calendar"></i>
+                            <span data-fecha-hoy></span>
+                        </div>
+
+                        <div class="item-fecha-hora">
+                            <i data-lucide="clock"></i>
+                            <span id="reloj-actual">--:--</span>
+                        </div>
+
+                    </div>
+
+                    <!-- MENÚ DEL PERFIL (js/sesion.js) -->
+                    <div class="menu-perfil" data-menu-perfil>
+
+                        <button
+                            type="button"
+                            class="usuario-perfil"
+                            data-abrir-menu-perfil
+                            aria-haspopup="menu"
+                            aria-expanded="false"
+                            aria-controls="menuPerfil"
+                        >
+                            <span class="avatar-usuario">
+                                <i data-lucide="user-round"></i>
+                            </span>
+
+                            <span class="nombre-perfil" data-nombre-usuario>Usuario</span>
+
+                            <i data-lucide="chevron-down" class="flecha-perfil"></i>
+                        </button>
+
+                        <div class="menu-perfil-lista" id="menuPerfil" role="menu" aria-label="Opciones del perfil" hidden>
+
+                            <div class="menu-perfil-cabecera">
+                                <strong data-nombre-usuario>Usuario</strong>
+                                <span data-rol-usuario>Alumno</span>
+                            </div>
+
+                            <a href="configuracion.html" class="menu-perfil-opcion" role="menuitem">
+                                <i data-lucide="user-cog"></i>
+                                <span class="texto-opcion">Ajustes del perfil</span>
+                            </a>
+
+                            <!-- Apariencia: el switch cambia entre luna (oscuro) y sol (claro) -->
+                            <button
+                                type="button"
+                                class="menu-perfil-opcion"
+                                role="menuitemcheckbox"
+                                aria-checked="false"
+                                aria-label="Apariencia: modo claro"
+                                data-cambiar-tema
+                            >
+                                <i data-lucide="palette"></i>
+                                <span class="texto-opcion">Apariencia</span>
+                                <span class="switch-tema" aria-hidden="true">
+                                    <i data-lucide="moon" class="switch-tema-fondo fondo-luna"></i>
+                                    <i data-lucide="sun" class="switch-tema-fondo fondo-sol"></i>
+                                    <span class="switch-tema-perilla">
+                                        <i data-lucide="moon" data-icono-tema="oscuro"></i>
+                                        <i data-lucide="sun" data-icono-tema="claro"></i>
+                                    </span>
+                                </span>
+                            </button>
+
+                            <hr class="menu-perfil-separador">
+
+                            <button type="button" class="menu-perfil-opcion peligro" role="menuitem" data-cerrar-sesion>
+                                <i data-lucide="log-out"></i>
+                                <span class="texto-opcion">Cerrar sesión</span>
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <main class="contenedor pagina-configuracion">
+
+                <!-- TÍTULO -->
+                <section class="encabezado-configuracion">
+                    <h1>Configuración</h1>
+                    <p>Tus datos de usuario, tu contraseña y la apariencia de la biblioteca.</p>
+                </section>
+
+
+                <!-- =================================================
+                     1. DATOS DEL PERFIL  (GET / PUT /api/perfil)
+                ================================================== -->
+                <section class="tarjeta-config" id="datos" aria-labelledby="tituloDatos">
+
+                    <div class="cabecera-config">
+                        <div class="icono-config">
+                            <i data-lucide="user-round-pen"></i>
+                        </div>
+
+                        <div>
+                            <h2 id="tituloDatos">Datos del perfil</h2>
+                            <p>Nombre y datos de contacto de tu usuario.</p>
+                        </div>
+                    </div>
+
+                    <form id="formularioPerfil" class="formulario-config" novalidate>
+
+                        <div class="campos-config">
+
+                            <div class="campo-config completo">
+                                <label for="perfilNombre">Nombre y apellido</label>
+                                <input id="perfilNombre" name="nombre_completo" type="text" maxlength="120" autocomplete="name" required placeholder="Cargando...">
+                                <small class="pista-config" data-pista="nombre_completo"></small>
+                            </div>
+
+                            <div class="campo-config">
+                                <label for="perfilDni">DNI</label>
+                                <input id="perfilDni" name="dni" type="text" readonly tabindex="-1" placeholder="—">
+                                <small class="pista-config">Es tu usuario para entrar. Solo se puede cambiar en la biblioteca.</small>
+                            </div>
+
+                            <div class="campo-config">
+                                <label for="perfilRol">Rol</label>
+                                <input id="perfilRol" name="rol" type="text" readonly tabindex="-1" placeholder="—">
+                            </div>
+
+                            <div class="campo-config">
+                                <label for="perfilCorreo">Correo electrónico</label>
+                                <input id="perfilCorreo" name="correo" type="email" maxlength="120" autocomplete="email" required placeholder="nombre@correo.com">
+                                <small class="pista-config" data-pista="correo"></small>
+                            </div>
+
+                            <div class="campo-config">
+                                <label for="perfilTelefono">Teléfono</label>
+                                <input id="perfilTelefono" name="telefono" type="tel" maxlength="30" autocomplete="tel" required placeholder="11 4444-5678">
+                                <small class="pista-config" data-pista="telefono"></small>
+                            </div>
+
+                            <div class="campo-config completo">
+                                <label for="perfilDireccion">Dirección</label>
+                                <input id="perfilDireccion" name="direccion" type="text" maxlength="150" autocomplete="street-address" required placeholder="Calle y número">
+                                <small class="pista-config" data-pista="direccion"></small>
+                            </div>
+
+                        </div>
+
+                        <div class="acciones-config">
+                            <button type="reset" class="boton-secundario">
+                                Deshacer cambios
+                            </button>
+
+                            <button type="submit" class="boton-principal" id="botonGuardarPerfil">
+                                <i data-lucide="save"></i>
+                                Guardar cambios
+                            </button>
+                        </div>
+
+                    </form>
+
+                </section>
+
+
+                <!-- =================================================
+                     2. CAMBIAR CONTRASEÑA  (PUT /api/perfil/clave)
+                ================================================== -->
+                <section class="tarjeta-config" id="clave" aria-labelledby="tituloClave">
+
+                    <div class="cabecera-config">
+                        <div class="icono-config">
+                            <i data-lucide="key-round"></i>
+                        </div>
+
+                        <div>
+                            <h2 id="tituloClave">Cambiar contraseña</h2>
+                            <p>Para cambiarla tenés que escribir la actual. Mínimo 6 caracteres.</p>
+                        </div>
+                    </div>
+
+                    <form id="formularioClave" class="formulario-config" novalidate>
+
+                        <!-- Para que el navegador sepa de qué usuario es la contraseña -->
+                        <input type="text" autocomplete="username" hidden>
+
+                        <div class="aviso-config exito" id="avisoClave" role="status" hidden></div>
+
+                        <div class="campos-config">
+
+                            <div class="campo-config">
+                                <label for="claveActual">Contraseña actual</label>
+
+                                <div class="campo-clave-config">
+                                    <input
+                                        id="claveActual"
+                                        name="clave_actual"
+                                        type="password"
+                                        autocomplete="current-password"
+                                        maxlength="72"
+                                        required
+                                        placeholder="Tu contraseña actual"
+                                    >
+
+                                    <button type="button" class="boton-icono" data-ver-clave="claveActual" aria-label="Mostrar contraseña" title="Mostrar contraseña">
+                                        <i data-lucide="eye"></i>
+                                    </button>
+                                </div>
+
+                                <small class="pista-config" data-pista="clave_actual"></small>
+                            </div>
+
+                            <div class="campo-config separador-campos" aria-hidden="true"></div>
+
+                            <div class="campo-config">
+                                <label for="claveNueva">Contraseña nueva</label>
+
+                                <div class="campo-clave-config">
+                                    <input
+                                        id="claveNueva"
+                                        name="clave_nueva"
+                                        type="password"
+                                        autocomplete="new-password"
+                                        maxlength="72"
+                                        required
+                                        placeholder="Mínimo 6 caracteres"
+                                    >
+
+                                    <button type="button" class="boton-icono" data-ver-clave="claveNueva" aria-label="Mostrar contraseña" title="Mostrar contraseña">
+                                        <i data-lucide="eye"></i>
+                                    </button>
+                                </div>
+
+                                <small class="pista-config" data-pista="clave_nueva"></small>
+                            </div>
+
+                            <div class="campo-config">
+                                <label for="claveRepetida">Repetir contraseña nueva</label>
+
+                                <div class="campo-clave-config">
+                                    <input
+                                        id="claveRepetida"
+                                        name="confirmacion"
+                                        type="password"
+                                        autocomplete="new-password"
+                                        maxlength="72"
+                                        required
+                                        placeholder="Escribila de nuevo"
+                                    >
+
+                                    <button type="button" class="boton-icono" data-ver-clave="claveRepetida" aria-label="Mostrar contraseña" title="Mostrar contraseña">
+                                        <i data-lucide="eye"></i>
+                                    </button>
+                                </div>
+
+                                <small class="pista-config" data-pista="confirmacion"></small>
+                            </div>
+
+                        </div>
+
+                        <div class="acciones-config">
+                            <button type="submit" class="boton-principal" id="botonCambiarClave">
+                                <i data-lucide="lock-keyhole"></i>
+                                Cambiar contraseña
+                            </button>
+                        </div>
+
+                    </form>
+
+                </section>
+
+
+                <!-- =================================================
+                     3. APARIENCIA  (js/tema.js)
+                ================================================== -->
+                <section class="tarjeta-config" id="apariencia" aria-labelledby="tituloApariencia">
+
+                    <div class="cabecera-config">
+                        <div class="icono-config">
+                            <i data-lucide="palette"></i>
+                        </div>
+
+                        <div>
+                            <h2 id="tituloApariencia">Apariencia</h2>
+                            <p>Elegí cómo se ve la biblioteca. Se guarda en este navegador.</p>
+                        </div>
+                    </div>
+
+                    <div class="fila-apariencia">
+                        <div>
+                            <strong>Modo claro / oscuro</strong>
+                            <span>La luna es el modo oscuro y el sol el modo claro.</span>
+                        </div>
+
+                        <button type="button" class="switch-tema" role="switch" aria-checked="false" aria-label="Modo claro" title="Cambiar entre modo oscuro y claro" data-cambiar-tema>
+                            <i data-lucide="moon" class="switch-tema-fondo fondo-luna"></i>
+                            <i data-lucide="sun" class="switch-tema-fondo fondo-sol"></i>
+                            <span class="switch-tema-perilla">
+                                <i data-lucide="moon" data-icono-tema="oscuro"></i>
+                                <i data-lucide="sun" data-icono-tema="claro"></i>
+                            </span>
+                        </button>
+                    </div>
+
+                </section>
+
+            </main>
+
+        </div>
+
+    </div>
+
+
+    <!-- AVISO FLOTANTE -->
+    <div id="avisoFlotante" class="aviso-flotante" role="status" aria-live="polite" hidden></div>
+
+
+    <!-- Sesión, encabezado y menú del perfil -->
+    <script type="module" src="js/sesion.js"></script>
+
+    <!-- Datos del perfil, contraseña y tema -->
+    <script type="module" src="js/configuracion.js"></script>
+
+    <!-- PWA: registro del Service Worker y botón "Instalar app" -->
+    <script src="js/pwa.js"></script>
+
+    <script>
+        window.lucide?.createIcons();
+    </script>
+
+</body>
+
+</html>

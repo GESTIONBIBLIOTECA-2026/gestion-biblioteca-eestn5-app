@@ -1,0 +1,260 @@
+/* =========================================================
+   CONFIGURACIÓN - Datos del perfil, contraseña y tema
+   Reutiliza variables, layout y botones de estilo-general.css
+========================================================= */
+
+.pagina-configuracion {
+    max-width: 980px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.encabezado-configuracion h1 {
+    color: var(--texto-fuerte);
+    font-size: clamp(25px, 3vw, 32px);
+    line-height: 1.2;
+    margin-bottom: 8px;
+}
+
+.encabezado-configuracion p {
+    color: var(--texto-secundario);
+    font-size: 14px;
+}
+
+
+/* --- Tarjetas --- */
+
+.tarjeta-config {
+    background: var(--fondo-tarjeta);
+    border: 1px solid var(--borde-tarjeta);
+    border-radius: 12px;
+    box-shadow: var(--sombra-tarjeta);
+    scroll-margin-top: 90px;
+}
+
+.cabecera-config {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 22px 24px;
+    border-bottom: 1px solid var(--borde-tarjeta);
+}
+
+.icono-config {
+    width: 44px;
+    height: 44px;
+    flex: 0 0 44px;
+    display: grid;
+    place-items: center;
+    border-radius: 10px;
+    background: var(--azul-suave);
+    color: var(--azul-500);
+}
+
+.icono-config svg {
+    width: 21px;
+    height: 21px;
+}
+
+.cabecera-config h2 {
+    color: var(--texto-fuerte);
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.cabecera-config p {
+    margin-top: 4px;
+    color: var(--texto-secundario);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+
+/* --- Formularios --- */
+
+.formulario-config {
+    padding: 24px;
+}
+
+.campos-config {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.campo-config {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+}
+
+.campo-config.completo {
+    grid-column: 1 / -1;
+}
+
+/* En contraseña: la actual sola en su fila y las nuevas abajo */
+.separador-campos {
+    display: block;
+}
+
+.campo-config label {
+    color: var(--texto-secundario);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.campo-config input {
+    width: 100%;
+    min-width: 0;
+    min-height: 42px;
+    padding: 10px 12px;
+    border: 1px solid var(--borde-tarjeta);
+    border-radius: 8px;
+    outline: none;
+    background: var(--fondo-campo);
+    color: var(--texto-principal);
+    font: inherit;
+    font-size: 13px;
+    transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+.campo-config input::placeholder {
+    color: var(--texto-mutado);
+}
+
+.campo-config input:focus {
+    border-color: var(--azul-400);
+    box-shadow: 0 0 0 3px var(--azul-suave);
+}
+
+/* Campos que no se pueden cambiar desde acá (DNI y rol) */
+.campo-config input[readonly] {
+    background: var(--fondo-hundido);
+    border-style: dashed;
+    color: var(--texto-secundario);
+    cursor: default;
+}
+
+.campo-config input[readonly]:focus {
+    border-color: var(--borde-tarjeta);
+    box-shadow: none;
+}
+
+.campo-config input[aria-invalid="true"] {
+    border-color: var(--rojo-500);
+}
+
+.campo-clave-config {
+    display: flex;
+    gap: 8px;
+}
+
+.campo-clave-config input {
+    flex: 1;
+}
+
+.campo-clave-config .boton-icono {
+    flex: 0 0 42px;
+    width: 42px;
+    height: 42px;
+}
+
+.pista-config {
+    color: var(--texto-mutado);
+    font-size: 11px;
+    line-height: 1.45;
+}
+
+.pista-config:empty {
+    display: none;
+}
+
+.pista-config.error {
+    color: var(--rojo-500);
+}
+
+.acciones-config {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 22px;
+    padding-top: 18px;
+    border-top: 1px solid var(--borde-tarjeta);
+}
+
+
+/* --- Avisos dentro de cada tarjeta --- */
+
+.aviso-config {
+    margin-bottom: 20px;
+    padding: 12px 15px;
+    border: 1px solid var(--rojo-borde);
+    border-radius: 8px;
+    background: var(--rojo-fondo);
+    color: var(--rojo-500);
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.aviso-config.exito {
+    border-color: var(--verde-borde);
+    background: var(--verde-fondo);
+    color: var(--verde-600);
+}
+
+
+/* --- Apariencia --- */
+
+.fila-apariencia {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 22px 24px;
+}
+
+.fila-apariencia > div strong {
+    display: block;
+    color: var(--texto-principal);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.fila-apariencia > div span {
+    display: block;
+    margin-top: 4px;
+    color: var(--texto-mutado);
+    font-size: 12px;
+}
+
+
+/* --- Responsive --- */
+
+@media (max-width: 700px) {
+
+    .campos-config {
+        grid-template-columns: 1fr;
+    }
+
+    .campo-config.completo {
+        grid-column: auto;
+    }
+
+    .separador-campos {
+        display: none;
+    }
+
+    .formulario-config,
+    .fila-apariencia {
+        padding: 18px;
+    }
+
+    .cabecera-config {
+        padding: 18px;
+    }
+}
+#perfilRol { text-transform: capitalize; }

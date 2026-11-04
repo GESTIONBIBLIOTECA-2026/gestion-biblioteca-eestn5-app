@@ -1,0 +1,25 @@
+{
+  "name": "Biblioteca Invaluable - E.E.S.T. N° 5",
+  "short_name": "Biblioteca",
+  "description": "App de la biblioteca para alumnos y docentes: credencial digital, préstamos y catálogo de libros",
+  "start_url": "index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#070d1b",
+  "theme_color": "#0b1329",
+  "icons": [
+    {
+      "src": "assets/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

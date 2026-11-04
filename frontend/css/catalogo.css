@@ -1,0 +1,100 @@
+/* =========================================================
+   CATÁLOGO (alumnos y docentes) - ESTILOS EXCLUSIVOS
+   Grilla de tarjetas mobile-first. Lo general: componentes.css
+========================================================= */
+
+.grilla-libros {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 16px;
+    padding: 20px 24px 24px;
+}
+
+.grilla-libros .panel-vacio {
+    grid-column: 1 / -1;
+}
+
+.tarjeta-libro {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-width: 0;
+    padding: 18px;
+    border: 1px solid var(--borde-tarjeta);
+    border-radius: 12px;
+    background: var(--superficie-sutil);
+    transition: border-color .2s ease, transform .2s ease;
+}
+
+.tarjeta-libro:hover {
+    border-color: var(--azul-400);
+    transform: translateY(-2px);
+}
+
+.tarjeta-libro-portada {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 72px;
+    height: 104px;
+    overflow: hidden;
+    border-radius: 10px;
+    background: var(--azul-suave);
+    color: var(--azul-500);
+}
+
+.tarjeta-libro-portada svg {
+    width: 30px;
+    height: 30px;
+}
+
+/* La imagen tapa el ícono; si no carga, queda transparente y se ve el ícono */
+.tarjeta-libro-portada img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.tarjeta-libro-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.tarjeta-libro h3 {
+    color: var(--texto-principal);
+    font-size: 15px;
+    line-height: 1.35;
+}
+
+.tarjeta-libro p {
+    margin-top: 4px;
+    color: var(--texto-secundario);
+    font-size: 13px;
+}
+
+.tarjeta-libro small,
+.tarjeta-libro-pie small {
+    display: block;
+    margin-top: 6px;
+    color: var(--texto-mutado);
+    font-size: 11px;
+}
+
+.tarjeta-libro-pie {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding-top: 12px;
+    border-top: 1px solid var(--borde-tarjeta);
+}
+
+@media (max-width: 760px) {
+    .grilla-libros {
+        grid-template-columns: 1fr;
+        padding: 16px 18px 18px;
+    }
+}

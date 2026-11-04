@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Iniciar sesión - Biblioteca Invaluable</title>
+
+    <!-- PWA (clase 07): manifiesto, color de la barra de estado y soporte para iOS -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0b1329">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Biblioteca">
+    <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+
+    <!-- Tema claro / oscuro (el que eligió el usuario) -->
+    <script src="js/tema.js"></script>
+
+    <!-- Estilos generales -->
+    <link rel="stylesheet" href="css/estilo-general.css">
+
+    <!-- Estilos exclusivos del login -->
+    <link rel="stylesheet" href="css/login.css">
+
+    <!-- Fuente Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Iconos Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+</head>
+
+<body class="pagina-login">
+
+
+<!-- =====================================================
+     ENCABEZADO
+====================================================== -->
+
+
+<header class="encabezado-login">
+
+    <div class="logo-login">
+
+        <div class="icono-logo-login">
+            <i data-lucide="book-open"></i>
+        </div>
+
+        <span class="texto-logo-login">
+            Biblioteca Invaluable
+        </span>
+
+        <span class="separador-login"></span>
+
+        <span class="texto-panel-login">
+            Sistema de Biblioteca
+        </span>
+
+    </div>
+
+    <div class="acciones-encabezado-login">
+
+        <!-- INSTALAR LA APP (PWA · js/pwa.js): oculto hasta que el navegador lo permite -->
+        <button type="button" id="btn-instalar-app" class="boton-principal boton-instalar" hidden>
+            <i data-lucide="download"></i>
+            <span>Instalar app</span>
+        </button>
+
+        <!-- Apariencia: luna = oscuro · sol = claro (js/tema.js) -->
+        <div class="control-apariencia">
+            <span class="texto-apariencia">Apariencia</span>
+            <button type="button" class="switch-tema" role="switch" aria-checked="false" aria-label="Modo claro" title="Cambiar entre modo oscuro y claro" data-cambiar-tema>
+                <i data-lucide="moon" class="switch-tema-fondo fondo-luna"></i>
+                <i data-lucide="sun" class="switch-tema-fondo fondo-sol"></i>
+                <span class="switch-tema-perilla">
+                    <i data-lucide="moon" data-icono-tema="oscuro"></i>
+                    <i data-lucide="sun" data-icono-tema="claro"></i>
+                </span>
+            </button>
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     CONTENIDO PRINCIPAL
+====================================================== -->
+
+<main class="contenedor-login">
+
+    <section class="tarjeta-login">
+
+
+        <!-- =================================================
+             TÍTULO
+        ================================================== -->
+
+        <div class="cabecera-login">
+
+            <div class="icono-login">
+                <i data-lucide="lock-keyhole"></i>
+            </div>
+
+            <h1>
+                Iniciar sesión
+            </h1>
+
+            <p>
+                Ingresá con tu DNI y contraseña. App para alumnos y docentes.
+            </p>
+
+        </div>
+
+
+
+        <!-- =================================================
+             MENSAJE DE ERROR
+        ================================================== -->
+
+        <div class="alerta-login" id="alertaLogin" role="alert" hidden>
+
+            <i data-lucide="circle-alert"></i>
+
+            <span id="textoAlerta"></span>
+
+        </div>
+
+
+
+        <!-- =================================================
+             FORMULARIO
+        ================================================== -->
+
+        <form id="formularioLogin" novalidate>
+
+
+            <!-- DNI -->
+
+            <div class="grupo-entrada">
+
+                <label for="dni">
+                    DNI
+                </label>
+
+                <div class="contenedor-entrada">
+
+                    <i data-lucide="contact"></i>
+
+                    <input
+                        type="text"
+                        id="dni"
+                        name="dni"
+                        placeholder="Ej: 30111222"
+                        autocomplete="username"
+                        inputmode="numeric"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- CONTRASEÑA -->
+
+            <div class="grupo-entrada">
+
+                <label for="clave">
+                    Contraseña
+                </label>
+
+                <div class="contenedor-entrada">
+
+                    <i data-lucide="key-round"></i>
+
+                    <input
+                        type="password"
+                        id="clave"
+                        name="clave"
+                        placeholder="Tu contraseña"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                    <!-- Mostrar / ocultar contraseña -->
+                    <button
+                        type="button"
+                        class="boton-ver-clave"
+                        id="botonVerClave"
+                        aria-label="Mostrar contraseña"
+                    >
+                        <i data-lucide="eye"></i>
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- BOTÓN -->
+
+            <button type="submit" class="boton-login" id="botonLogin">
+
+                <i data-lucide="log-in"></i>
+
+                <span>Ingresar</span>
+
+            </button>
+
+        </form>
+
+
+    </section>
+
+
+    <p class="pie-login">
+        E.E.S.T. N° 5 · Sistema de Gestión de Biblioteca
+    </p>
+
+</main>
+
+
+
+<!-- =====================================================
+     SCRIPTS
+====================================================== -->
+
+<script>
+    window.lucide?.createIcons();
+</script>
+
+<!-- PWA: registro del Service Worker y botón "Instalar app" -->
+<script src="js/pwa.js"></script>
+
+<!-- Lógica del login (ES Module) -->
+<script type="module" src="js/login.js"></script>
+
+
+</body>
+
+</html>

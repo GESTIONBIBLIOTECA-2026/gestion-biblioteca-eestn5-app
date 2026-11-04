@@ -1,0 +1,139 @@
+/* =========================================================
+   NAVEGACIÓN INFERIOR Y LOGO MÓVIL
+   Visible únicamente en pantallas ≤ 1024px.
+   Reemplaza al menú lateral en tablets y celulares.
+   Se carga en las tres páginas junto a estilo-general.css.
+========================================================= */
+
+/* Ocultos por defecto (escritorio) */
+.nav-inferior { display: none; }
+.logo-movil   { display: none; }
+
+
+/* =========================================================
+   TABLETS Y CELULARES (≤ 1024px)
+========================================================= */
+@media (max-width: 1024px) {
+
+    /* Ocultar por completo la barra lateral */
+    .sidebar,
+    .menu-compacto .sidebar,
+    .menu-compacto .sidebar:hover,
+    .menu-compacto .sidebar:focus-within {
+        display: none;
+    }
+
+    /* El contenido ya no necesita margen izquierdo */
+    .menu-compacto .contenido-principal {
+        margin-left: 0;
+    }
+
+    /* Apilar header + contenido en columna */
+    .layout-dashboard {
+        flex-direction: column;
+    }
+
+    /* Logo de la biblioteca en el encabezado */
+    .logo-movil {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    /* Ocultar el texto "Mi biblioteca" — lo reemplaza el logo */
+    .titulo-encabezado {
+        display: none;
+    }
+
+    /* El encabezado se queda pegado arriba al hacer scroll */
+    .encabezado-superior {
+        position: sticky;
+        top: 0;
+        z-index: 30;
+        padding: 10px 20px;
+    }
+
+    /* Espacio inferior para que el nav no tape el contenido */
+    .contenido-principal {
+        padding-bottom: 80px;
+    }
+
+    /* -------------------------------------------------------
+       BARRA DE NAVEGACIÓN INFERIOR
+    ------------------------------------------------------- */
+    .nav-inferior {
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 50;
+        background: var(--fondo-sidebar);
+        border-top: 1px solid var(--borde-tarjeta);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        /* Respeta el notch del iPhone */
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    .nav-inferior-item {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        padding: 10px 4px 14px;
+        color: var(--texto-mutado);
+        text-decoration: none;
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: .3px;
+        border-top: 2px solid transparent;
+        transition: color .2s ease, border-color .2s ease;
+    }
+
+    .nav-inferior-item svg {
+        width: 22px;
+        height: 22px;
+        flex-shrink: 0;
+    }
+
+    /* Ítem activo: azul + raya superior */
+    .nav-inferior-item.activo {
+        color: var(--azul-400);
+        border-top-color: var(--azul-400);
+    }
+
+    .nav-inferior-item:hover:not(.activo) {
+        color: var(--texto-principal);
+    }
+
+    .nav-inferior-item:focus-visible {
+        outline: 2px solid var(--azul-500);
+        outline-offset: -2px;
+    }
+
+    /* Tema claro */
+    .modo-claro .nav-inferior-item.activo {
+        color: var(--azul-500);
+        border-top-color: var(--azul-500);
+    }
+}
+
+
+/* =========================================================
+   CELULARES PEQUEÑOS (≤ 480px) — ajustes de tipografía
+========================================================= */
+@media (max-width: 480px) {
+
+    .nav-inferior-item {
+        font-size: 9px;
+        padding: 10px 2px 12px;
+    }
+
+    .nav-inferior-item svg {
+        width: 20px;
+        height: 20px;
+    }
+}
