@@ -1,0 +1,19 @@
+{
+  "name": "gestion-biblioteca-eestn5-2026",
+  "version": "1.0.0",
+  "description": "Sistema de Gestión de Biblioteca - E.E.S.T N° 5 (7° 5ta)",
+  "type": "module",
+  "main": "api/index.js",
+  "scripts": {
+    "start": "node backend/index.js",
+    "dev": "nodemon backend/index.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.12.0"
+  }
+}

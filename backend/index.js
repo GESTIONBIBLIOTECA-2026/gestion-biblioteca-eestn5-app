@@ -45,8 +45,12 @@ app.use((err, req, res, next) => {
     res.status(500).json({ error: "Error interno del servidor" });
 });
 
-// 6. Encender el servidor y probar la base de datos
-app.listen(PORT, async () => {
-    console.log(`🚀 Servidor activo en http://localhost:${PORT}`);
-    await comprobarConexion();
-});
+// 6. Encender el servidor y probar la base de datos (solo en entorno local/standalone)
+if (!process.env.VERCEL) {
+    app.listen(PORT, async () => {
+        console.log(`🚀 Servidor activo en http://localhost:${PORT}`);
+        await comprobarConexion();
+    });
+}
+
+export default app;
