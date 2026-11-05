@@ -1,4 +1,4 @@
-# 📱 Biblioteca Invaluable · App para alumnos y docentes (Grupo 5)
+# 📱 Biblioteca Invaluable · App para alumnos y docentes (Grupo 5) - https://biblioteca-kennedy.vercel.app/
 
 **Progressive Web App (PWA)** del sistema de biblioteca, hecha con la teoría de la **clase 07**.
 Es solo para **alumnos y docentes**: el administrador usa la plataforma web de escritorio (si intenta entrar acá,
