@@ -4,7 +4,7 @@
   "description": "App de la biblioteca para alumnos y docentes: credencial digital, préstamos y catálogo de libros",
   "start_url": "index.html",
   "scope": "./",
-  "display": "standalone", // pantalla completa
+  "display": "standalone",
   "orientation": "portrait",
   "background_color": "#070d1b",
   "theme_color": "#0b1329",

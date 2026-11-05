@@ -2,7 +2,7 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "Backend de la App (PWA) de la Biblioteca para alumnos y docentes (Grupo 5) - Express MVC + mysql2 (MySQL Aiven)",
-  "type": "module",  // Para poder usar import/export en el backend
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
