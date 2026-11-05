@@ -33,8 +33,6 @@
         rel="stylesheet"
     >
 
-    <!-- Iconos Lucide -->
-    <script src="https://unpkg.com/lucide@latest"></script>
 
 </head>
 
@@ -51,7 +49,7 @@
     <div class="logo-login">
 
         <div class="icono-logo-login">
-            <i data-lucide="book-open"></i>
+            <span class="icono" aria-hidden="true">📖</span>
         </div>
 
         <span class="texto-logo-login">
@@ -70,7 +68,7 @@
 
         <!-- INSTALAR LA APP (PWA · js/pwa.js): oculto hasta que el navegador lo permite -->
         <button type="button" id="btn-instalar-app" class="boton-principal boton-instalar" hidden>
-            <i data-lucide="download"></i>
+            <span class="icono" aria-hidden="true">📲</span>
             <span>Instalar app</span>
         </button>
 
@@ -78,11 +76,11 @@
         <div class="control-apariencia">
             <span class="texto-apariencia">Apariencia</span>
             <button type="button" class="switch-tema" role="switch" aria-checked="false" aria-label="Modo claro" title="Cambiar entre modo oscuro y claro" data-cambiar-tema>
-                <i data-lucide="moon" class="switch-tema-fondo fondo-luna"></i>
-                <i data-lucide="sun" class="switch-tema-fondo fondo-sol"></i>
+                <span class="icono switch-tema-fondo fondo-luna" aria-hidden="true">🌙</span>
+                <span class="icono switch-tema-fondo fondo-sol" aria-hidden="true">☀️</span>
                 <span class="switch-tema-perilla">
-                    <i data-lucide="moon" data-icono-tema="oscuro"></i>
-                    <i data-lucide="sun" data-icono-tema="claro"></i>
+                    <span class="icono" data-icono-tema="oscuro" aria-hidden="true">🌙</span>
+                    <span class="icono" data-icono-tema="claro" aria-hidden="true">☀️</span>
                 </span>
             </button>
         </div>
@@ -109,7 +107,7 @@
         <div class="cabecera-login">
 
             <div class="icono-login">
-                <i data-lucide="lock-keyhole"></i>
+                <span class="icono" aria-hidden="true">🔒</span>
             </div>
 
             <h1>
@@ -130,7 +128,7 @@
 
         <div class="alerta-login" id="alertaLogin" role="alert" hidden>
 
-            <i data-lucide="circle-alert"></i>
+            <span class="icono" aria-hidden="true">⚠️</span>
 
             <span id="textoAlerta"></span>
 
@@ -155,7 +153,7 @@
 
                 <div class="contenedor-entrada">
 
-                    <i data-lucide="contact"></i>
+                    <span class="icono" aria-hidden="true">🪪</span>
 
                     <input
                         type="text"
@@ -182,7 +180,7 @@
 
                 <div class="contenedor-entrada">
 
-                    <i data-lucide="key-round"></i>
+                    <span class="icono" aria-hidden="true">🔑</span>
 
                     <input
                         type="password"
@@ -200,7 +198,7 @@
                         id="botonVerClave"
                         aria-label="Mostrar contraseña"
                     >
-                        <i data-lucide="eye"></i>
+                        <span class="icono" aria-hidden="true">👁️</span>
                     </button>
 
                 </div>
@@ -212,7 +210,7 @@
 
             <button type="submit" class="boton-login" id="botonLogin">
 
-                <i data-lucide="log-in"></i>
+                <span class="icono" aria-hidden="true">🔓</span>
 
                 <span>Ingresar</span>
 
@@ -236,9 +234,6 @@
      SCRIPTS
 ====================================================== -->
 
-<script>
-    window.lucide?.createIcons();
-</script>
 
 <!-- PWA: registro del Service Worker y botón "Instalar app" -->
 <script src="js/pwa.js"></script>

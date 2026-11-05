@@ -8,7 +8,7 @@
    para que los celulares descarguen los archivos nuevos.
    ========================================================================== */
 
-const CACHE_NAME = "biblioteca-app-v4";   // App Shell (HTML, CSS, JS, íconos)
+const CACHE_NAME = "biblioteca-app-v6";   // App Shell (HTML, CSS, JS, íconos)
 const CACHE_API = "biblioteca-api-v1";    // últimas respuestas GET de la API
 
 // App Shell: lo mínimo para dibujar la app sin internet.

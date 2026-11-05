@@ -4,7 +4,7 @@
    ========================================================================== */
 
 const MAX_INTENTOS = 5;
-const BLOQUEO_MS = 5 * 60 * 1000;
+const BLOQUEO_MS = 5 * 60 * 1000; 
 const intentos = new Map();   // ip → { cantidad, hasta }
 
 export const limitarIntentos = (req, res, next) => {

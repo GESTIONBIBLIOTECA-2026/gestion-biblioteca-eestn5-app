@@ -34,20 +34,20 @@ export function crearMetricasHTML({ activos, vencidos, reservas, proximo }) {
     const plazo = !proximo ? "—" : proximo.dias_restantes === 0 ? "Hoy" : proximo.dias_restantes === 1 ? "Mañana" : plural(proximo.dias_restantes, "día");
 
     const tarjetas = [
-        ["book-open-check", "Libros en tu poder", enPoder,
+        ["📗", "Libros en tu poder", enPoder,
             activos.length ? `${plural(activos.length, "préstamo")} en curso` : "No tenés libros prestados", ""],
-        ["calendar-clock", "Próxima devolución", plazo,
+        ["📅", "Próxima devolución", plazo,
             proximo ? `${escapar(proximo.titulo)} · ${fechaCorta(proximo.fecha_devolucion_estimada)}` : "Sin vencimientos cercanos",
             proximo?.dias_restantes <= 2 ? "aviso" : ""],
-        ["alert-triangle", "Préstamos vencidos", vencidos.length,
+        ["⚠️", "Préstamos vencidos", vencidos.length,
             vencidos.length ? "Devolvelos cuanto antes" : "Estás al día", vencidos.length ? "atrasado" : "en-curso"],
-        ["bookmark", "Reservas para retirar", reservas.length,
+        ["🔖", "Reservas para retirar", reservas.length,
             reservas.length ? "Te esperan en la biblioteca" : "No tenés reservas", ""]
     ];
 
     return tarjetas.map(([icono, titulo, valor, detalle, tono]) => `
         <article class="metrica ${tono}">
-            <span class="metrica-icono"><i data-lucide="${icono}"></i></span>
+            <span class="metrica-icono"><span class="icono" aria-hidden="true">${icono}</span></span>
             <h3>${titulo}</h3>
             <strong>${valor}</strong>
             <p>${detalle}</p>
@@ -78,7 +78,7 @@ export function crearDevolucionHTML(p) {
 /* --- Una reserva pendiente de retiro --- */
 export const crearReservaHTML = (p) => `
     <li class="prestamo reserva">
-        <div class="prestamo-plazo"><i data-lucide="bookmark"></i></div>
+        <div class="prestamo-plazo"><span class="icono" aria-hidden="true">🔖</span></div>
         <div class="prestamo-info">
             <strong>${escapar(p.titulo)}</strong>
             <span>Pedido el ${fechaCorta(p.fecha_pedido)}${p.cantidad > 1 ? ` · <b>${p.cantidad} ejemplares</b>` : ""} · retiralo en el mostrador</span>

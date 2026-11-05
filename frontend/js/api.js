@@ -45,7 +45,9 @@ export const iniciarSesion = (dni, clave) => pedir("/auth/login", "POST", { dni,
 export const obtenerSesionActual = () => pedir("/auth/perfil");
 
 // --- Catálogo de libros (Grupo 6) · solo lectura ---
-export const listarLibros = (filtros = {}) => pedir(`/libros?${new URLSearchParams(filtros)}`);
+// La búsqueda la hace MySQL: no distingue tildes ni mayúsculas ("fisica" encuentra "Física")
+export const listarLibros = (texto = "", categoria = 0, disponibilidad = "") =>
+    pedir(`/libros?texto=${texto}&categoria=${categoria}&disponibilidad=${disponibilidad}`);
 export const obtenerCategorias = () => pedir("/libros/categorias");
 
 // --- Mi perfil ---

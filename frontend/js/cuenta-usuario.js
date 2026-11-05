@@ -34,7 +34,8 @@ export function mostrarCredencial(usuario) {
     $("#credencialDni").textContent = Number(usuario.dni).toLocaleString("es-AR");
     $("#credencialDatos").innerHTML = datos.map(([etiqueta, valor]) => `<div><dt>${etiqueta}</dt><dd>${escapar(valor)}</dd></div>`).join("");
     $("#estadoCuenta").textContent = texto;
-    $("#estadoCuenta").className = `estado-cuenta estado ${clase}`;
+    $("#estadoCuenta").classList.remove("en-curso", "atrasado", "devuelto");
+    $("#estadoCuenta").classList.add("estado", clase);
 }
 
 
@@ -42,13 +43,13 @@ export function mostrarCredencial(usuario) {
 function elegirAviso({ usuario, vencidos, proximo, sanciones }) {
     if (usuario.condicion === "suspendido") {
         const motivo = sanciones.find((s) => s.en_vigor)?.motivo;
-        return ["peligro", "ban", `Tu cuenta está suspendida y no podés pedir libros.${motivo ? ` Motivo: ${motivo}.` : ""} Acercate a la biblioteca para regularizarla.`];
+        return ["peligro", "🚫", `Tu cuenta está suspendida y no podés pedir libros.${motivo ? ` Motivo: ${motivo}.` : ""} Acercate a la biblioteca para regularizarla.`];
     }
     if (vencidos.length) {
-        return ["peligro", "alert-triangle", `Tenés ${plural(vencidos.length, "préstamo")} vencido${vencidos.length === 1 ? "" : "s"}. Devolvé los libros en la biblioteca para poder volver a pedir.`];
+        return ["peligro", "⚠️", `Tenés ${plural(vencidos.length, "préstamo")} vencido${vencidos.length === 1 ? "" : "s"}. Devolvé los libros en la biblioteca para poder volver a pedir.`];
     }
     if (proximo && proximo.dias_restantes <= 2) {
-        return ["aviso", "bell-ring", `«${proximo.titulo}»: ${textoPlazo(proximo).toLowerCase()}. Acordate de devolverlo a tiempo.`];
+        return ["aviso", "🔔", `«${proximo.titulo}»: ${textoPlazo(proximo).toLowerCase()}. Acordate de devolverlo a tiempo.`];
     }
     return null;
 }
@@ -60,8 +61,9 @@ export function mostrarAvisoCuenta(datos) {
     if (!aviso) return;
 
     const [tipo, icono, texto] = aviso;
-    caja.className = `aviso-cuenta ${tipo}`;
-    caja.innerHTML = `<i data-lucide="${icono}"></i><p></p>`;
+    caja.classList.remove("peligro", "aviso");
+    caja.classList.add(tipo);
+    caja.innerHTML = `<span class="icono" aria-hidden="true">${icono}</span><p></p>`;
     caja.querySelector("p").textContent = texto;   // lleva títulos de libros: va con textContent
 }
 
@@ -69,7 +71,7 @@ export function mostrarAvisoCuenta(datos) {
 /* --- Una sanción (en vigor o levantada) --- */
 export const crearSancionHTML = (s) => `
     <li class="prestamo ${s.en_vigor ? "atrasado" : ""}">
-        <div class="prestamo-plazo"><i data-lucide="${s.en_vigor ? "ban" : "check"}"></i></div>
+        <div class="prestamo-plazo"><span class="icono" aria-hidden="true">${s.en_vigor ? "🚫" : "✅"}</span></div>
         <div class="prestamo-info">
             <strong>${escapar(s.motivo || (s.tipo === "atraso" ? "Atraso en una devolución" : "Sanción manual"))}</strong>
             <span>Desde el ${fechaCorta(s.fecha_inicio)}${s.fecha_fin ? ` hasta el ${fechaCorta(s.fecha_fin)}` : ""}</span>

@@ -43,9 +43,8 @@
     color: var(--azul-500);
 }
 
-.tarjeta-libro-portada svg {
-    width: 30px;
-    height: 30px;
+.tarjeta-libro-portada .icono {
+    font-size: 22px;
 }
 
 /* La imagen tapa el ícono; si no carga, queda transparente y se ve el ícono */

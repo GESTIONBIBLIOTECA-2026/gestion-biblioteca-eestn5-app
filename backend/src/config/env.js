@@ -5,12 +5,9 @@
    ========================================================================== */
 
 import dotenv from "dotenv";
-import { fileURLToPath } from "url";
 
-// 1. Carpeta backend/ (así el .env y el ca.pem se encuentran aunque se arranque desde otra carpeta)
-export const CARPETA_BACKEND = fileURLToPath(new URL("../../", import.meta.url));
-
-dotenv.config({ path: `${CARPETA_BACKEND}.env`, quiet: true });
+// 1. Lee backend/.env (el servidor se arranca desde backend/: npm run dev)
+dotenv.config();
 
 // 2. Variables sin las que el sistema no puede funcionar (Aiven Cloud + sesión)
 const OBLIGATORIAS = ["JWT_SECRET", "DB_HOST", "DB_PORT", "DB_USER", "DB_PASSWORD", "DB_NAME"];
@@ -34,6 +31,6 @@ export const DB = {
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
     ssl: process.env.DB_SSL !== "false",
-    caPath: process.env.DB_CA_PATH ? `${CARPETA_BACKEND}${process.env.DB_CA_PATH}` : "",
+    caPath: process.env.DB_CA_PATH || "",   // relativo a backend/ (ej: ca.pem)
     zonaHoraria: process.env.DB_ZONA_HORARIA || "-03:00"
 };

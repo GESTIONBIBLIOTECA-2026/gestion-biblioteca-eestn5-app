@@ -52,9 +52,8 @@
     flex-shrink: 0;
 }
 
-.icono-logo-login svg {
-    width: 23px;
-    height: 23px;
+.icono-logo-login .icono {
+    font-size: 23px;
 }
 
 .texto-logo-login {
@@ -127,10 +126,8 @@
     color: var(--azul-500);
 }
 
-.icono-login svg {
-    width: 34px;
-    height: 34px;
-    stroke-width: 2;
+.icono-login .icono {
+    font-size: 34px;
 }
 
 .cabecera-login h1 {
@@ -170,9 +167,8 @@
     display: none;
 }
 
-.alerta-login svg {
-    width: 19px;
-    height: 19px;
+.alerta-login .icono {
+    font-size: 19px;
     flex-shrink: 0;
 }
 
@@ -205,9 +201,8 @@
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.contenedor-entrada > svg {
-    width: 21px;
-    height: 21px;
+.contenedor-entrada > .icono {
+    font-size: 21px;
     flex-shrink: 0;
     color: var(--texto-secundario);
 }
@@ -258,9 +253,8 @@
     color: var(--azul-500);
 }
 
-.boton-ver-clave svg {
-    width: 19px;
-    height: 19px;
+.boton-ver-clave .icono {
+    font-size: 19px;
 }
 
 
@@ -297,12 +291,11 @@
     opacity: 0.75;
 }
 
-.boton-login svg {
-    width: 18px;
-    height: 18px;
+.boton-login .icono {
+    font-size: 18px;
 }
 
-.boton-login.cargando svg {
+.boton-login.cargando .icono {
     animation: girar 0.9s linear infinite;
 }
 

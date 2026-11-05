@@ -284,9 +284,8 @@ body {
     font-weight: 600;
 }
 
-.nav-item svg {
-    width: 20px;
-    height: 20px;
+.nav-item .icono {
+    font-size: 20px;
     flex: 0 0 20px;
 }
 
@@ -318,7 +317,7 @@ body {
 
 /* Textos ocultos mientras está cerrada */
 .menu-compacto .sidebar-logo-texto,
-.menu-compacto .nav-item span {
+.menu-compacto .nav-item span:not(.icono) {
     opacity: 0;
     transition: opacity .15s ease;
 }
@@ -407,9 +406,8 @@ body {
     white-space: nowrap;
 }
 
-.item-fecha-hora svg {
-    width: 16px;
-    height: 16px;
+.item-fecha-hora .icono {
+    font-size: 16px;
     color: var(--azul-400);
     flex-shrink: 0;
 }
@@ -460,9 +458,8 @@ body {
     color: var(--blanco);
 }
 
-.avatar-usuario svg {
-    width: 18px;
-    height: 18px;
+.avatar-usuario .icono {
+    font-size: 18px;
 }
 
 .nombre-perfil {
@@ -549,9 +546,8 @@ body {
     outline: none;
 }
 
-.menu-perfil-opcion > svg {
-    width: 17px;
-    height: 17px;
+.menu-perfil-opcion > .icono {
+    font-size: 17px;
     flex-shrink: 0;
     color: var(--texto-secundario);
 }
@@ -561,7 +557,7 @@ body {
 }
 
 .menu-perfil-opcion.peligro,
-.menu-perfil-opcion.peligro > svg {
+.menu-perfil-opcion.peligro > .icono {
     color: var(--rojo-500);
 }
 
@@ -570,6 +566,15 @@ body {
     margin: 6px 4px;
     border: none;
     background: var(--borde-tarjeta);
+}
+
+/* Íconos: emojis dentro de <span class="icono"> (como el proyecto integrador de la clase 04) */
+.icono {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-style: normal;
+    line-height: 1;
 }
 
 /* Íconos sol / luna según el tema */
@@ -612,6 +617,7 @@ button.switch-tema:focus-visible {
     height: 14px;
     transform: translateY(-50%);
     opacity: .7;
+    font-size: 11px;
 }
 
 .switch-tema .fondo-luna { left: 8px; }
@@ -633,9 +639,8 @@ button.switch-tema:focus-visible {
     transition: transform .25s ease, background .25s ease;
 }
 
-.switch-tema-perilla svg {
-    width: 14px;
-    height: 14px;
+.switch-tema-perilla .icono {
+    font-size: 14px;
 }
 
 .modo-claro .switch-tema-perilla {
@@ -699,12 +704,11 @@ button.switch-tema:focus-visible {
     cursor: wait;
 }
 
-.boton-principal svg,
-.boton-secundario svg,
-.boton-peligro svg,
-.boton-icono svg {
-    width: 16px;
-    height: 16px;
+.boton-principal .icono,
+.boton-secundario .icono,
+.boton-peligro .icono,
+.boton-icono .icono {
+    font-size: 16px;
 }
 
 .boton-secundario {

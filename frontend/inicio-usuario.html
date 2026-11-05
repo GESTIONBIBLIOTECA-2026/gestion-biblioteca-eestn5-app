@@ -33,8 +33,6 @@
         rel="stylesheet"
     >
 
-    <!-- Iconos Lucide -->
-    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
 <body>
@@ -48,7 +46,7 @@
             <a href="inicio-usuario.html" class="sidebar-logo" aria-label="Ir al inicio">
 
                 <div class="sidebar-logo-icono">
-                    <i data-lucide="book-open"></i>
+                    <span class="icono" aria-hidden="true">📖</span>
                 </div>
 
                 <div class="sidebar-logo-texto">
@@ -61,17 +59,17 @@
             <nav class="sidebar-nav" aria-label="Menú principal">
 
                 <a href="inicio-usuario.html" class="nav-item activo" aria-current="page" title="Inicio">
-                    <i data-lucide="house"></i>
+                    <span class="icono" aria-hidden="true">🏠</span>
                     <span>Inicio</span>
                 </a>
 
                 <a href="catalogo.html" class="nav-item" title="Catálogo">
-                    <i data-lucide="book"></i>
+                    <span class="icono" aria-hidden="true">📚</span>
                     <span>Catálogo</span>
                 </a>
 
                 <a href="configuracion.html" class="nav-item" title="Configuración">
-                    <i data-lucide="settings"></i>
+                    <span class="icono" aria-hidden="true">⚙️</span>
                     <span>Configuración</span>
                 </a>
 
@@ -92,19 +90,19 @@
 
                     <!-- INSTALAR LA APP (PWA · js/pwa.js): oculto hasta que el navegador lo permite -->
                     <button type="button" id="btn-instalar-app" class="boton-principal boton-instalar" hidden>
-                        <i data-lucide="download"></i>
+                        <span class="icono" aria-hidden="true">📲</span>
                         <span>Instalar app</span>
                     </button>
 
                     <div class="info-fecha-hora">
 
                         <div class="item-fecha-hora">
-                            <i data-lucide="calendar"></i>
+                            <span class="icono" aria-hidden="true">📅</span>
                             <span data-fecha-hoy></span>
                         </div>
 
                         <div class="item-fecha-hora">
-                            <i data-lucide="clock"></i>
+                            <span class="icono" aria-hidden="true">🕒</span>
                             <span id="reloj-actual">--:--</span>
                         </div>
 
@@ -122,12 +120,12 @@
                             aria-controls="menuPerfil"
                         >
                             <span class="avatar-usuario">
-                                <i data-lucide="user-round"></i>
+                                <span class="icono" aria-hidden="true">👤</span>
                             </span>
 
                             <span class="nombre-perfil" data-nombre-usuario>Usuario</span>
 
-                            <i data-lucide="chevron-down" class="flecha-perfil"></i>
+                            <span class="icono flecha-perfil" aria-hidden="true">▾</span>
                         </button>
 
                         <div class="menu-perfil-lista" id="menuPerfil" role="menu" aria-label="Opciones del perfil" hidden>
@@ -138,7 +136,7 @@
                             </div>
 
                             <a href="configuracion.html" class="menu-perfil-opcion" role="menuitem">
-                                <i data-lucide="user-cog"></i>
+                                <span class="icono" aria-hidden="true">⚙️</span>
                                 <span class="texto-opcion">Ajustes del perfil</span>
                             </a>
 
@@ -151,14 +149,14 @@
                                 aria-label="Apariencia: modo claro"
                                 data-cambiar-tema
                             >
-                                <i data-lucide="palette"></i>
+                                <span class="icono" aria-hidden="true">🎨</span>
                                 <span class="texto-opcion">Apariencia</span>
                                 <span class="switch-tema" aria-hidden="true">
-                                    <i data-lucide="moon" class="switch-tema-fondo fondo-luna"></i>
-                                    <i data-lucide="sun" class="switch-tema-fondo fondo-sol"></i>
+                                    <span class="icono switch-tema-fondo fondo-luna" aria-hidden="true">🌙</span>
+                                    <span class="icono switch-tema-fondo fondo-sol" aria-hidden="true">☀️</span>
                                     <span class="switch-tema-perilla">
-                                        <i data-lucide="moon" data-icono-tema="oscuro"></i>
-                                        <i data-lucide="sun" data-icono-tema="claro"></i>
+                                        <span class="icono" data-icono-tema="oscuro" aria-hidden="true">🌙</span>
+                                        <span class="icono" data-icono-tema="claro" aria-hidden="true">☀️</span>
                                     </span>
                                 </span>
                             </button>
@@ -166,7 +164,7 @@
                             <hr class="menu-perfil-separador">
 
                             <button type="button" class="menu-perfil-opcion peligro" role="menuitem" data-cerrar-sesion>
-                                <i data-lucide="log-out"></i>
+                                <span class="icono" aria-hidden="true">🚪</span>
                                 <span class="texto-opcion">Cerrar sesión</span>
                             </button>
 
@@ -199,7 +197,7 @@
                     <section class="credencial" id="credencial" aria-labelledby="tituloCredencial">
 
                         <div class="credencial-cabecera">
-                            <span><i data-lucide="id-card"></i> Credencial digital</span>
+                            <span><span class="icono" aria-hidden="true">🪪</span> Credencial digital</span>
                             <span class="estado-cuenta" id="estadoCuenta">—</span>
                         </div>
 
@@ -234,22 +232,22 @@
 
                                 <!-- El catálogo es del Grupo 6 -->
                                 <a href="catalogo.html" class="accion-mini">
-                                    <div class="accion-mini-icono"><i data-lucide="search"></i></div>
+                                    <div class="accion-mini-icono"><span class="icono" aria-hidden="true">🔍</span></div>
                                     <span>Buscar libros</span>
                                 </a>
 
                                 <a href="#devoluciones" class="accion-mini">
-                                    <div class="accion-mini-icono"><i data-lucide="book-down"></i></div>
+                                    <div class="accion-mini-icono"><span class="icono" aria-hidden="true">📥</span></div>
                                     <span>Mis devoluciones</span>
                                 </a>
 
                                 <a href="#historial" class="accion-mini">
-                                    <div class="accion-mini-icono"><i data-lucide="history"></i></div>
+                                    <div class="accion-mini-icono"><span class="icono" aria-hidden="true">🕘</span></div>
                                     <span>Mi historial</span>
                                 </a>
 
                                 <a href="configuracion.html" class="accion-mini">
-                                    <div class="accion-mini-icono"><i data-lucide="user-pen"></i></div>
+                                    <div class="accion-mini-icono"><span class="icono" aria-hidden="true">✏️</span></div>
                                     <span>Mis datos y contraseña</span>
                                 </a>
 
@@ -358,9 +356,6 @@
     <!-- PWA: registro del Service Worker y botón "Instalar app" -->
     <script src="js/pwa.js"></script>
 
-    <script>
-        window.lucide?.createIcons();
-    </script>
 
 </body>
 

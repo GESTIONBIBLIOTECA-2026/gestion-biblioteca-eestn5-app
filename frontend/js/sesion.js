@@ -27,9 +27,11 @@ export function mostrarNombre(nombre, rol = "alumno") {
     document.querySelectorAll("[data-rol-usuario]").forEach((elemento) => { elemento.textContent = rol.charAt(0).toUpperCase() + rol.slice(1); });
 }
 
+// Se vuelve a llamar sola cada 30 segundos con setTimeout
 function actualizarReloj() {
     textoFecha.textContent = fechaDeHoy();
     textoReloj.textContent = new Date().toLocaleTimeString("es-AR", { hour: "2-digit", minute: "2-digit" });
+    setTimeout(actualizarReloj, 30000);
 }
 
 function alternarMenu(abrir) {
@@ -48,7 +50,6 @@ async function verificarSesion() {
 
         // Recién ahora se muestra la página
         document.documentElement.classList.remove("verificando-sesion");
-        document.dispatchEvent(new CustomEvent("sesion-verificada"));
 
     } catch (error) {
         if (error.status === 401) borrarSesion();   // token vencido, inválido o de un administrador
@@ -71,15 +72,7 @@ document.addEventListener("click", (evento) => {
     if (!evento.target.closest("[data-menu-perfil]")) alternarMenu(false);
 });
 
-document.addEventListener("keydown", (evento) => {
-    if (evento.key === "Escape" && !menuPerfil.hidden) {
-        alternarMenu(false);
-        botonPerfil.focus();
-    }
-});
-
 
 // 🚀 5. Inicialización
 actualizarReloj();
-setInterval(actualizarReloj, 30000);
 verificarSesion();

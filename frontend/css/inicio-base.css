@@ -19,9 +19,8 @@
     color: var(--azul-400);
 }
 
-.metrica-icono svg {
-    width: 22px;
-    height: 22px;
+.metrica-icono .icono {
+    font-size: 22px;
 }
 
 
@@ -88,9 +87,8 @@
     margin-bottom: 10px;
 }
 
-.accion-mini-icono svg {
-    width: 22px;
-    height: 22px;
+.accion-mini-icono .icono {
+    font-size: 22px;
 }
 
 .accion-mini span {

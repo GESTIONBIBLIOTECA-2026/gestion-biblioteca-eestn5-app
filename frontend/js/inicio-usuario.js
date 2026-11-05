@@ -82,8 +82,6 @@ async function cargarCuenta() {
         $("#listaDevoluciones").innerHTML = `<li class="lista-vacia">${escapar(mensaje)}</li>`;
         cuerpoHistorial.innerHTML = crearFilaMensajeHTML(mensaje, 5);
     }
-
-    window.lucide?.createIcons();   // íconos de lo que se acaba de dibujar
 }
 
 

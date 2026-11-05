@@ -58,10 +58,9 @@
     line-height: 1.5;
 }
 
-.aviso-cuenta svg {
+.aviso-cuenta .icono {
+    font-size: 20px;
     flex: 0 0 20px;
-    width: 20px;
-    height: 20px;
     margin-top: 1px;
 }
 
@@ -117,9 +116,8 @@
     gap: 8px;
 }
 
-.credencial-cabecera svg {
-    width: 17px;
-    height: 17px;
+.credencial-cabecera .icono {
+    font-size: 17px;
     color: var(--azul-500);
 }
 
@@ -210,9 +208,8 @@
     color: var(--azul-500);
 }
 
-.metrica-icono svg {
-    width: 18px;
-    height: 18px;
+.metrica-icono .icono {
+    font-size: 18px;
 }
 
 .metrica h3 {
@@ -320,9 +317,8 @@
     font-size: 11px;
 }
 
-.prestamo-plazo svg {
-    width: 22px;
-    height: 22px;
+.prestamo-plazo .icono {
+    font-size: 22px;
 }
 
 .prestamo.aviso .prestamo-plazo { color: var(--ambar-texto); }

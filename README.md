@@ -13,9 +13,6 @@ el backend responde `403`).
  frontend/             frontend/sw.js           backend/ (puerto 3000)                       src/database/db.js
 ```
 
-> 🧠 **Guía de Razonamiento y Arquitectura MVC (Obligatoria para G4, G5 y G6):**  
-> Consultá [docs/roadmap-implementacion-mvc.md](docs/roadmap-implementacion-mvc.md) para entender el flujo mental en 4 pasos (Model ➔ Controller ➔ Router ➔ View) y el orden de dependencias entre los 3 grupos.
-
 ---
 
 ## 📂 Estructura
@@ -50,13 +47,13 @@ el backend responde `403`).
 │       └── configuracion.js      configuracion.html: mis datos y contraseña
 │
 └── backend/                      MVC: index.js ➔ Router ➔ Controller ➔ Model ➔ MySQL
-    ├── index.js                  servidor Express (cors, express.json, rutas) + sirve frontend/
+    ├── index.js                  servidor Express (cors, express.json, rutas de la API)
     ├── .env.example              plantilla (el .env real NO se sube)
     ├── src/
     │   ├── config/               env.js (.env con fail-fast), constants.js (roles que usan la app), config.js (re-exporta)
     │   ├── database/db.js        pool de mysql2 → MySQL Aiven (SSL)
-    │   ├── models/               MODEL: solo SQL con comodines "?", devuelve datos
-    │   │   ├── usuario.models.js, usuario.sql.js, perfil.models.js, sancion.models.js
+    │   ├── models/               MODEL: cada consulta es un texto SQL fijo con comodines "?", devuelve datos
+    │   │   ├── usuario.models.js, perfil.models.js, sancion.models.js
     │   │   └── libro.models.js (catálogo, solo lectura)
     │   ├── controllers/          CONTROLLER: auth, perfil, sanciones (mi historial), libros + respuestas.js
     │   ├── routes/               ROUTER: auth, perfil, libros
@@ -106,13 +103,13 @@ Estrategias de caché del `sw.js`:
 > (`biblioteca-app-v1` → `v2`). Si no, los celulares siguen usando los archivos viejos de la caché.
 > Mientras programás: F12 → **Application** → **Service Workers** → tildá **Update on reload** y **Bypass for network**.
 
-Los íconos (Lucide) y la fuente Inter siguen viniendo de internet (CDN): sin conexión la app abre igual,
-pero sin esos íconos y con la letra del sistema.
+Los íconos son emojis (como el proyecto integrador de la clase 04), así que también se ven sin internet.
+Solo la fuente Inter viene de internet: sin conexión la app usa la letra del sistema.
 
 ### Probarla
-1. Encendé el backend (ver abajo) y abrí **http://localhost:3000** en Chrome.
+1. Encendé el backend y abrí el frontend con **Live Server** (ver abajo).
 2. F12 → **Application** → **Manifest**: sin errores y con los íconos.
-3. **Service Workers**: `sw.js` en verde (*activated and is running*). **Cache Storage**: `biblioteca-app-v1`.
+3. **Service Workers**: `sw.js` en verde (*activated and is running*). **Cache Storage**: `biblioteca-app-v4`.
 4. Iniciá sesión, tildá **Offline** en *Service Workers* y recargá: la app sigue mostrando tu cuenta y el catálogo.
 5. **Lighthouse** → categoría *Progressive Web App* → *Analyze page load*.
 
@@ -147,8 +144,10 @@ Tiene que decir:
 ✅ Base de datos conectada
 ```
 
-### 4. Abrir la app
-**http://localhost:3000** (abre `index.html`, el inicio de sesión).
+### 4. Abrir la app (clase 04 §4.3 y clase 06 §7.4)
+En VS Code, clic derecho en `frontend/index.html` → **Open with Live Server** (el inicio de sesión).
+El frontend corre en otro origen (ej. `http://127.0.0.1:5500`) y le pide los datos a la API en
+`http://localhost:3000/api`: por eso el backend usa `cors()`. Con doble clic (`file:///`) los módulos no cargan.
 
 **Datos de prueba (opcional):** `backend/scripts/datos-prueba-grupo5.sql` carga usuarios de ejemplo (DNI 99010016,
 clave `prueba123`) con préstamos al día, devueltos, atrasados y sanciones. Al final del archivo está cómo borrarlos.

@@ -12,10 +12,13 @@ import { mostrarNombre } from "./sesion.js";
 // 🎯 1. Nodos del DOM
 const formularioPerfil = document.querySelector("#formularioPerfil");
 const formularioClave  = document.querySelector("#formularioClave");
+const botonDeshacer    = document.querySelector("#botonDeshacer");
 const avisoClave       = document.querySelector("#avisoClave");
 
-// 🧠 2. Estado (últimos datos guardados, para "Deshacer cambios")
+// 🧠 2. Estado (últimos datos guardados, para "Deshacer cambios") y campos de cada formulario
 let perfilGuardado = null;
+const CAMPOS_PERFIL = ["nombre_completo", "correo", "telefono", "direccion"];
+const CAMPOS_CLAVE = ["clave_actual", "clave_nueva", "confirmacion"];
 
 // 🎨 3. Funciones de UI
 function completarPerfil(usuario) {
@@ -23,12 +26,18 @@ function completarPerfil(usuario) {
 
     // Los campos se llaman igual que los datos (name="correo" ↔ usuario.correo)
     ["nombre_completo", "dni", "rol", "correo", "telefono", "direccion"].forEach((campo) => {
-        formularioPerfil.elements[campo].value = usuario[campo] ?? "";
+        formularioPerfil.querySelector(`[name="${campo}"]`).value = usuario[campo] ?? "";
     });
 }
 
-// Datos del formulario como objeto: { nombre_completo, correo, ... }
-const leerFormulario = (formulario) => Object.fromEntries(new FormData(formulario));
+// Lee los campos pedidos y arma el objeto: { nombre_completo: "...", correo: "...", ... }
+function leerFormulario(formulario, campos) {
+    const datos = {};
+    campos.forEach((campo) => {
+        datos[campo] = formulario.querySelector(`[name="${campo}"]`).value;
+    });
+    return datos;
+}
 
 // 🌐 4. Cargar el perfil
 async function cargarPerfil() {
@@ -41,14 +50,13 @@ async function cargarPerfil() {
 }
 
 // 🖱️ 5. Eventos
-
 // 💾 Guardar mis datos
 formularioPerfil.addEventListener("submit", async (evento) => {
     evento.preventDefault();
     marcarCampos(formularioPerfil);
 
     try {
-        const { mensaje, payload } = await guardarMiPerfil(leerFormulario(formularioPerfil));
+        const { mensaje, payload } = await guardarMiPerfil(leerFormulario(formularioPerfil, CAMPOS_PERFIL));
         completarPerfil(payload);
         mostrarNombre(payload.nombre_completo, payload.rol);   // el nombre nuevo también en el encabezado
         mostrarAviso(mensaje);
@@ -58,9 +66,8 @@ formularioPerfil.addEventListener("submit", async (evento) => {
     }
 });
 
-// ↩️ Deshacer cambios
-formularioPerfil.addEventListener("reset", (evento) => {
-    evento.preventDefault();
+// ↩️ Deshacer cambios: vuelve a poner los últimos datos guardados
+botonDeshacer.addEventListener("click", () => {
     marcarCampos(formularioPerfil);
     if (perfilGuardado) completarPerfil(perfilGuardado);
 });
@@ -72,8 +79,8 @@ formularioClave.addEventListener("submit", async (evento) => {
     avisoClave.hidden = true;
 
     try {
-        const { mensaje } = await cambiarMiClave(leerFormulario(formularioClave));
-        formularioClave.reset();
+        const { mensaje } = await cambiarMiClave(leerFormulario(formularioClave, CAMPOS_CLAVE));
+        CAMPOS_CLAVE.forEach((campo) => { formularioClave.querySelector(`[name="${campo}"]`).value = ""; });
         avisoClave.textContent = mensaje;
         avisoClave.hidden = false;
     } catch (error) {

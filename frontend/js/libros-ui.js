@@ -15,10 +15,16 @@ function estadoLibro({ ejemplares_totales, ejemplares_disponibles, stock_reserva
 
 /* --- Opciones de las categorías para todos los <select data-categorias> de la página --- */
 export function llenarCategorias(categorias) {
-    const opciones = categorias.map(({ id, nombre }) => `<option value="${id}">${escapar(nombre)}</option>`).join("");
     document.querySelectorAll("[data-categorias]").forEach((select) => {
         select.querySelectorAll("option:not(:first-child)").forEach((opcion) => opcion.remove());
-        select.insertAdjacentHTML("beforeend", opciones);
+
+        // createElement + append (clase 04 §1.5); textContent no deja pasar HTML
+        categorias.forEach(({ id, nombre }) => {
+            const opcion = document.createElement("option");
+            opcion.value = id;
+            opcion.textContent = nombre;
+            select.append(opcion);
+        });
     });
 }
 
@@ -32,7 +38,7 @@ export function crearTarjetaLibroHTML(libro) {
 
     return `
         <article class="tarjeta-libro">
-            <div class="tarjeta-libro-portada"><i data-lucide="book-open"></i>${portada}</div>
+            <div class="tarjeta-libro-portada"><span class="icono" aria-hidden="true">📖</span>${portada}</div>
             <div class="tarjeta-libro-info">
                 <h3>${escapar(libro.titulo)}</h3>
                 <p>${escapar(libro.autores ?? "Sin autor")}</p>

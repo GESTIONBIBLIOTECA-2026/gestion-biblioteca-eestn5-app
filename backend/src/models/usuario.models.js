@@ -1,6 +1,7 @@
 /* ==========================================================================
    usuario.models.js - Modelo de Usuarios (acceso a datos) · Grupo 5
    Solo consulta la base con comodines "?" y devuelve datos puros.
+   Cada consulta es UN texto SQL fijo: los datos nunca se pegan adentro.
    ========================================================================== */
 
 import connection from "../database/db.js";
@@ -41,8 +42,29 @@ export const getSesion = async (id) => {
     return rows[0];
 };
 
+// Datos públicos de un usuario (NUNCA el password_hash) + condición de la cuenta:
+// baja / suspendido (estado o sanción en vigor) / atraso (préstamo vencido) / habilitado
 export const getUsuarioPorId = async (id) => {
-    const [rows] = await connection.query(`SELECT ${COLUMNAS} ${DESDE} WHERE u.id = ?`, [id]);
+    const sql = `SELECT u.id, u.dni, u.nombre_completo, c.nombre AS curso, u.correo, u.telefono, u.direccion,
+                        r.nombre AS rol, u.estado, u.fecha_alta, u.anio_inscripcion,
+                        CASE
+                            WHEN u.estado = 'baja' THEN 'baja'
+                            WHEN u.estado = 'suspendido' OR EXISTS (
+                                SELECT 1 FROM sanciones s WHERE s.usuario_id = u.id
+                                AND s.activa = TRUE AND (s.fecha_fin IS NULL OR s.fecha_fin >= CURRENT_DATE)
+                            ) THEN 'suspendido'
+                            WHEN EXISTS (
+                                SELECT 1 FROM pedidos p WHERE p.usuario_id = u.id
+                                AND (p.estado = 'vencido' OR (p.estado = 'prestado' AND p.fecha_devolucion_estimada < CURRENT_DATE))
+                            ) THEN 'atraso'
+                            ELSE 'habilitado'
+                        END AS condicion,
+                        (SELECT COUNT(*) FROM pedidos p WHERE p.usuario_id = u.id AND p.estado IN ('prestado', 'vencido')) AS prestamos_en_curso
+                 FROM usuarios u
+                 JOIN roles r ON r.id = u.rol_id
+                 LEFT JOIN cursos c ON c.id = u.curso_id
+                 WHERE u.id = ?`;
+    const [rows] = await connection.query(sql, [id]);
     return rows[0];
 };
 

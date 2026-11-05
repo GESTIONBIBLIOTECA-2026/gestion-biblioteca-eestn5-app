@@ -3,7 +3,7 @@
    Los Models importan "connection" y hacen connection.query(sql, [valores])
    ========================================================================== */
 
-import mysql from "mysql2/promise";
+import mysql from "mysql2/promise"; // mysql2 con promesas (async/await)
 import { readFileSync, existsSync } from "fs";
 import { DB } from "../config/config.js";
 
@@ -19,7 +19,7 @@ const connection = mysql.createPool({
     user: DB.user,
     password: DB.password,
     database: DB.database,
-    ssl,
+    ssl, // cifra la conexión con Aiven
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0,
