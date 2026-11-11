@@ -98,3 +98,166 @@
         padding: 16px 18px 18px;
     }
 }
+
+/* --- Acciones de tarjeta y botón de reserva --- */
+.tarjeta-libro-acciones {
+    margin-top: 4px;
+}
+
+.boton-reservar {
+    width: 100%;
+    padding: 9px 12px;
+    font-size: 13px;
+}
+
+.boton-reservar svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* --- Banner escolar de alerta (sanciones / morosidad) --- */
+.banner-alerta {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding: 16px 20px;
+    border: 1px solid var(--bordo-borde);
+    border-radius: 12px;
+    background: var(--bordo-fondo-fuerte);
+    color: var(--bordo-texto);
+}
+
+.banner-alerta svg {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    margin-top: 2px;
+    color: var(--rojo-500);
+}
+
+.banner-alerta h3 {
+    margin: 0 0 4px;
+    color: var(--texto-principal);
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.banner-alerta p {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+/* --- Diálogo modal de reserva --- */
+.dialogo-reserva {
+    width: min(92vw, 480px);
+    max-width: none;
+    padding: 0;
+    margin: auto;
+    border: 1px solid var(--borde-tarjeta);
+    border-radius: 14px;
+    background: var(--fondo-sidebar);
+    color: var(--texto-principal);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.dialogo-reserva[open] {
+    display: block;
+}
+
+.dialogo-reserva::backdrop {
+    background: rgba(4, 8, 18, 0.75);
+    backdrop-filter: blur(5px);
+}
+
+.dialogo-reserva-contenido {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.dialogo-reserva-cabecera {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    border-bottom: 1px solid var(--borde-tarjeta);
+    padding-bottom: 16px;
+}
+
+.dialogo-reserva-cabecera h2 {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--texto-principal);
+    margin: 0;
+}
+
+.dialogo-reserva-cabecera p {
+    margin: 4px 0 0;
+    color: var(--texto-secundario);
+    font-size: 13px;
+}
+
+.dialogo-reserva-cuerpo {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.dialogo-campo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.dialogo-campo label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--texto-secundario);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.dialogo-campo input {
+    padding: 10px 12px;
+    border: 1px solid var(--borde-tarjeta);
+    border-radius: 8px;
+    background: var(--fondo-campo);
+    color: var(--texto-principal);
+    font: inherit;
+    font-size: 14px;
+}
+
+.dialogo-campo input:focus {
+    outline: none;
+    border-color: var(--azul-400);
+}
+
+.dialogo-reserva-info {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px 14px;
+    border-radius: 8px;
+    background: var(--azul-suave);
+    color: var(--azul-500);
+    font-size: 12px;
+    line-height: 1.45;
+}
+
+.dialogo-reserva-info svg {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    margin-top: 1px;
+}
+
+.dialogo-reserva-acciones {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 8px;
+}
+

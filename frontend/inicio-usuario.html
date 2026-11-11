@@ -204,11 +204,12 @@
                         </div>
 
                         <div class="credencial-cuerpo">
-                            <div>
+                            <div class="credencial-info">
                                 <h2 id="tituloCredencial">—</h2>
                                 <p id="credencialDetalle">—</p>
                                 <p class="credencial-dni">DNI <strong id="credencialDni">—</strong></p>
                             </div>
+                            <div class="credencial-qr-caja" id="credencialQr"></div>
                         </div>
 
                         <dl class="credencial-datos" id="credencialDatos"></dl>
@@ -300,6 +301,7 @@
                     <!-- Filtros (js: data-filtro) -->
                     <div class="filtros-historial" id="filtrosHistorial" role="group" aria-label="Filtrar historial">
                         <button type="button" class="activo" data-filtro="todos">Todos <span data-cantidad="todos">0</span></button>
+                        <button type="button" data-filtro="reservas">Reservas <span data-cantidad="reservas">0</span></button>
                         <button type="button" data-filtro="en_curso">En curso <span data-cantidad="en_curso">0</span></button>
                         <button type="button" data-filtro="devueltos">Devueltos <span data-cantidad="devueltos">0</span></button>
                         <button type="button" data-filtro="atrasos">Con atraso <span data-cantidad="atrasos">0</span></button>

@@ -23,6 +23,7 @@ let filtroActual = "todos";
 // Filtros del historial: cada uno es una función que decide si el préstamo entra (HOF .filter)
 const FILTROS = {
     todos: () => true,
+    reservas: (p) => p.estado === "pendiente",
     en_curso: (p) => ["prestado", "vencido"].includes(p.estado),
     devueltos: (p) => p.estado === "devuelto",
     atrasos: (p) => p.dias_atraso > 0

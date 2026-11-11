@@ -22,6 +22,35 @@ export function llenarCategorias(categorias) {
     });
 }
 
+/* --- Fila de la tabla del administrador (las acciones van con data-accion + data-id: delegación) --- */
+export function crearFilaLibroHTML(libro) {
+    const [texto, clase] = estadoLibro(libro);
+    const reservados = libro.cantidad_reservada > 0 ? `<small>${libro.cantidad_reservada} reservado/s</small>` : "";
+    const portada = libro.portada_url ? `<img src="${escapar(libro.portada_url)}" alt="" loading="lazy">` : `<i data-lucide="book"></i>`;
+
+    return `
+        <tr>
+            <td>
+                <div class="libro-identidad">
+                    <div class="libro-portada">${portada}</div>
+                    <div><strong>${escapar(libro.titulo)}</strong><small>${escapar(libro.autores ?? "Sin autor")}</small></div>
+                </div>
+            </td>
+            <td>${escapar(libro.isbn ?? "—")}</td>
+            <td>${escapar(libro.categoria)}</td>
+            <td>${libro.anio ?? "—"}</td>
+            <td><span class="stock-libro">${libro.ejemplares_disponibles} / ${libro.ejemplares_totales}</span>${reservados}</td>
+            <td><span class="etiqueta ${clase}">${texto}</span></td>
+            <td>
+                <div class="acciones-fila">
+                    <button type="button" class="boton-icono" data-accion="editar" data-id="${libro.id}" title="Editar libro" aria-label="Editar ${escapar(libro.titulo)}"><i data-lucide="pencil"></i></button>
+                    <button type="button" class="boton-icono" data-accion="stock" data-id="${libro.id}" title="Actualizar stock" aria-label="Actualizar stock de ${escapar(libro.titulo)}"><i data-lucide="layers"></i></button>
+                    <button type="button" class="boton-icono peligro" data-accion="baja" data-id="${libro.id}" title="Dar de baja" aria-label="Dar de baja ${escapar(libro.titulo)}"><i data-lucide="trash-2"></i></button>
+                </div>
+            </td>
+        </tr>`;
+}
+
 /* --- Tarjeta del catálogo para alumnos y docentes (catalogo.html) --- */
 export function crearTarjetaLibroHTML(libro) {
     const [texto, clase] = estadoLibro(libro);
@@ -42,5 +71,12 @@ export function crearTarjetaLibroHTML(libro) {
                 <span class="etiqueta ${clase}">${hayStock ? `${texto} · ${libro.stock_reservable} libre/s` : texto}</span>
                 <small>${libro.ejemplares_totales} ejemplar(es) en la biblioteca</small>
             </div>
+            ${hayStock ? `
+            <div class="tarjeta-libro-acciones">
+                <button type="button" class="boton-principal boton-reservar" data-reservar-libro="${libro.id}" data-titulo="${escapar(libro.titulo)}" data-stock="${libro.stock_reservable}">
+                    <i data-lucide="bookmark-plus"></i>
+                    <span>Reservar</span>
+                </button>
+            </div>` : ""}
         </article>`;
 }

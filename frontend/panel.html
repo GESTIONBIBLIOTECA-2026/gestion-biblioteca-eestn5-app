@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="es" class="verificando-sesion" data-acceso="admin">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Biblioteca Invaluable - Panel de Administración</title>
+
+    <!-- Tema claro / oscuro (va primero para que no parpadee) -->
+    <script src="js/tema.js"></script>
+
+    <!-- Estilos generales -->
+    <link rel="stylesheet" href="css/estilo-general.css">
+
+    <!-- Estilos exclusivos del inicio -->
+    <link rel="stylesheet" href="css/index.css">
+
+    <!-- Fuente Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Iconos Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+
+    <!-- En Inicio el menú lateral queda desplegado -->
+    <div class="layout-dashboard">
+
+        <!-- BARRA LATERAL -->
+        <aside class="sidebar">
+
+            <a href="panel.html" class="sidebar-logo" aria-label="Ir al inicio">
+
+                <div class="sidebar-logo-icono">
+                    <i data-lucide="book-open"></i>
+                </div>
+
+                <div class="sidebar-logo-texto">
+                    <h2>BIBLIOTECA</h2>
+                    <p>INVALUABLE</p>
+                </div>
+
+            </a>
+
+            <nav class="sidebar-nav" aria-label="Menú principal">
+
+                <a href="panel.html" class="nav-item activo" aria-current="page" title="Inicio">
+                    <i data-lucide="house"></i>
+                    <span>Inicio</span>
+                </a>
+
+                <a href="usuarios.html" class="nav-item" title="Usuarios">
+                    <i data-lucide="users"></i>
+                    <span>Usuarios</span>
+                </a>
+
+                <a href="pedidos.html" class="nav-item" title="Mesa de entrada">
+                    <i data-lucide="book-open-check"></i>
+                    <span>Mesa de entrada</span>
+                </a>
+
+                <a href="libros.html" class="nav-item" title="Libros">
+                    <i data-lucide="book"></i>
+                    <span>Libros</span>
+                </a>
+
+                <a href="reportes.html" class="nav-item" title="Reportes">
+                    <i data-lucide="chart-no-axes-column"></i>
+                    <span>Reportes</span>
+                </a>
+
+                <a href="configuracion.html" class="nav-item" title="Configuración">
+                    <i data-lucide="settings"></i>
+                    <span>Configuración</span>
+                </a>
+
+            </nav>
+
+        </aside>
+
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <div class="contenido-principal">
+
+            <!-- ENCABEZADO SUPERIOR -->
+            <header class="encabezado-superior">
+
+                <p class="titulo-encabezado">Panel de Administración</p>
+
+                <div class="encabezado-derecha">
+
+                    <div class="info-fecha-hora">
+
+                        <div class="item-fecha-hora">
+                            <i data-lucide="calendar"></i>
+                            <span data-fecha-hoy></span>
+                        </div>
+
+                        <div class="item-fecha-hora">
+                            <i data-lucide="clock"></i>
+                            <span id="reloj-actual">--:--</span>
+                        </div>
+
+                    </div>
+
+                    <!-- MENÚ DEL PERFIL (js/menu-perfil.js) -->
+                    <div class="menu-perfil" data-menu-perfil>
+
+                        <button
+                            type="button"
+                            class="usuario-perfil"
+                            data-abrir-menu-perfil
+                            aria-haspopup="menu"
+                            aria-expanded="false"
+                            aria-controls="menuPerfil"
+                        >
+                            <span class="avatar-usuario">
+                                <i data-lucide="user-round"></i>
+                            </span>
+
+                            <span class="nombre-perfil" data-nombre-admin>Admin</span>
+
+                            <i data-lucide="chevron-down" class="flecha-perfil"></i>
+                        </button>
+
+                        <div class="menu-perfil-lista" id="menuPerfil" role="menu" aria-label="Opciones del perfil" hidden>
+
+                            <div class="menu-perfil-cabecera">
+                                <strong data-nombre-admin>Admin</strong>
+                                <span data-rol-admin>Administrador</span>
+                            </div>
+
+                            <a href="configuracion.html" class="menu-perfil-opcion" role="menuitem">
+                                <i data-lucide="user-cog"></i>
+                                <span class="texto-opcion">Ajustes del perfil</span>
+                            </a>
+
+                            <!-- Apariencia: el switch cambia entre luna (oscuro) y sol (claro) -->
+                            <button
+                                type="button"
+                                class="menu-perfil-opcion"
+                                role="menuitemcheckbox"
+                                aria-checked="false"
+                                aria-label="Apariencia: modo claro"
+                                data-cambiar-tema
+                            >
+                                <i data-lucide="palette"></i>
+                                <span class="texto-opcion">Apariencia</span>
+                                <span class="switch-tema" aria-hidden="true">
+                                    <i data-lucide="moon" class="switch-tema-fondo fondo-luna"></i>
+                                    <i data-lucide="sun" class="switch-tema-fondo fondo-sol"></i>
+                                    <span class="switch-tema-perilla">
+                                        <i data-lucide="moon" data-icono-tema="oscuro"></i>
+                                        <i data-lucide="sun" data-icono-tema="claro"></i>
+                                    </span>
+                                </span>
+                            </button>
+
+                            <hr class="menu-perfil-separador">
+
+                            <button type="button" class="menu-perfil-opcion peligro" role="menuitem" data-cerrar-sesion>
+                                <i data-lucide="log-out"></i>
+                                <span class="texto-opcion">Cerrar sesión</span>
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <!-- CONTENIDO DEL PANEL -->
+            <main class="contenedor">
+
+                <h1 class="solo-lectores-pantalla">Panel de inicio</h1>
+
+                <!-- MÉTRICAS REALES: GET /api/dashboard (js/inicio.js) -->
+                <section class="grid-metricas" aria-label="Resumen de la biblioteca">
+
+                    <article class="tarjeta-metrica">
+                        <div class="metrica-icono"><i data-lucide="library"></i></div>
+                        <h3>Libros en catálogo</h3>
+                        <strong id="total-libros">--</strong>
+                        <p>Títulos activos cargados</p>
+                    </article>
+
+                    <article class="tarjeta-metrica">
+                        <div class="metrica-icono"><i data-lucide="book-up"></i></div>
+                        <h3>Préstamos activos</h3>
+                        <strong id="total-prestamos">--</strong>
+                        <p>Libros que todavía no volvieron</p>
+                    </article>
+
+                    <article class="tarjeta-metrica alerta">
+                        <div class="metrica-icono"><i data-lucide="alert-triangle"></i></div>
+                        <h3>Usuarios morosos</h3>
+                        <strong id="total-morosos">--</strong>
+                        <a href="usuarios.html?filtro=morosos" class="enlace-detalles">
+                            Ver detalles
+                            <i data-lucide="arrow-right"></i>
+                        </a>
+                    </article>
+
+                </section>
+
+
+                <div class="grid-superior">
+
+                    <!-- ACCIONES RÁPIDAS -->
+                    <section class="tarjeta-acciones-rapidas" aria-labelledby="titulo-acciones">
+
+                        <div class="acciones-header">
+                            <h3 id="titulo-acciones">Acciones rápidas</h3>
+                        </div>
+
+                        <div class="rejilla-acciones-mini">
+
+                            <!-- Abre directo el formulario de alta de usuarios.html (#nuevo-usuario) -->
+                            <a href="usuarios.html#nuevo-usuario" class="accion-mini">
+                                <div class="accion-mini-icono">
+                                    <i data-lucide="user-plus"></i>
+                                </div>
+                                <span>Añadir usuario</span>
+                            </a>
+
+                            <!-- Préstamos los registra el Grupo 4: la página todavía no existe -->
+                            <a href="prestamos.html" class="accion-mini">
+                                <div class="accion-mini-icono">
+                                    <i data-lucide="book-plus"></i>
+                                </div>
+                                <span>Añadir préstamo</span>
+                            </a>
+
+                            <!-- Devoluciones las registra el Grupo 4: la página todavía no existe -->
+                            <a href="devoluciones.html" class="accion-mini">
+                                <div class="accion-mini-icono">
+                                    <i data-lucide="book-down"></i>
+                                </div>
+                                <span>Registrar devolución</span>
+                            </a>
+
+                            <a href="usuarios.html" class="accion-mini">
+                                <div class="accion-mini-icono">
+                                    <i data-lucide="search"></i>
+                                </div>
+                                <span>Buscar usuarios</span>
+                            </a>
+
+                        </div>
+
+                    </section>
+
+                </div>
+
+
+                <!-- ÚLTIMOS PRÉSTAMOS -->
+                <section class="tarjeta tarjeta-prestamos" aria-labelledby="titulo-prestamos">
+
+                    <div class="encabezado-prestamos">
+
+                        <h2 id="titulo-prestamos">Últimos préstamos</h2>
+
+                        <!-- Préstamos es del Grupo 4: la página todavía no existe -->
+                        <a href="prestamos.html" class="ver-todos">
+                            Ver todos
+                            <i data-lucide="arrow-right"></i>
+                        </a>
+
+                    </div>
+
+                    <div class="contenedor-tabla">
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th scope="col">Usuario</th>
+                                    <th scope="col">Libro</th>
+                                    <th scope="col">Fecha de préstamo</th>
+                                    <th scope="col">Fecha de devolución</th>
+                                    <th scope="col">Estado</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="cuerpoPrestamos">
+                                <tr>
+                                    <td colspan="5" class="celda-mensaje">
+                                        Cargando préstamos...
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </section>
+
+            </main>
+
+        </div>
+
+    </div>
+
+
+    <!-- SESIÓN, ENCABEZADO Y MENÚ DEL PERFIL -->
+    <script type="module" src="js/sesion.js"></script>
+
+    <!-- MÉTRICAS Y ÚLTIMOS PRÉSTAMOS -->
+    <script type="module" src="js/inicio.js"></script>
+
+    <!-- ICONOS -->
+    <script>
+        window.lucide?.createIcons();
+    </script>
+
+</body>
+
+</html>

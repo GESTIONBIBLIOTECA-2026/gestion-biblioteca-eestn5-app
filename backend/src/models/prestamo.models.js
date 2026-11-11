@@ -150,6 +150,13 @@ export async function actualizarVencidos(registradoPor) {
         `INSERT INTO pedido_historial (pedido_id,estado_anterior,estado_nuevo,registrado_por,observacion)
          VALUES (?, 'prestado', 'vencido', ?, 'Vencimiento detectado automáticamente')`,
         [pedido.id, registradoPor || null]);
+      await conn.query(
+        `INSERT INTO sanciones (usuario_id, pedido_id, tipo, motivo, fecha_inicio, activa, aplicada_por)
+         SELECT p.usuario_id, p.id, 'atraso', 'Préstamo vencido sin devolver', CURRENT_DATE, TRUE, NULL
+         FROM pedidos p
+         WHERE p.id = ? AND NOT EXISTS (
+           SELECT 1 FROM sanciones s WHERE s.pedido_id = p.id AND s.activa = TRUE
+         )`, [pedido.id]);
     }
     await conn.commit();
     return vencidos.length;

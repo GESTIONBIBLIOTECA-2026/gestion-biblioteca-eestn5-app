@@ -1,0 +1,37 @@
+/* =========================================================
+   LIBROS (GESTIÓN DE CATÁLOGO) - ESTILOS EXCLUSIVOS
+   Lo general (resumen, panel, tabla, etiquetas, ventanas)
+   está en componentes.css
+========================================================= */
+
+/* Portada mini + título y autores en la tabla */
+.libro-identidad {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-width: 220px;
+}
+
+.libro-portada {
+    display: grid;
+    place-items: center;
+    flex: 0 0 37px;
+    width: 37px;
+    height: 37px;
+    border-radius: 10px;
+    background: var(--azul-suave);
+    color: var(--azul-500);
+}
+
+.libro-portada svg {
+    width: 18px;
+    height: 18px;
+}
+
+/* Stock: "3 / 5" grande y los reservados abajo */
+.stock-libro {
+    color: var(--texto-principal);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}

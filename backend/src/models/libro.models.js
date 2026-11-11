@@ -41,6 +41,19 @@ export const getCategorias = async () => {
     return rows;
 };
 
+// Números del catálogo: títulos activos y ejemplares según su estado
+export const getResumenCatalogo = async () => {
+    const sql = `SELECT
+            (SELECT COUNT(*) FROM libros WHERE activo = TRUE) AS titulos,
+            COALESCE(SUM(e.estado <> 'baja'), 0) AS ejemplares,
+            COALESCE(SUM(e.estado = 'disponible'), 0) AS disponibles,
+            COALESCE(SUM(e.estado = 'prestado'), 0) AS prestados,
+            COALESCE(SUM(e.estado IN ('en_reparacion', 'extraviado', 'baja')), 0) AS fuera_de_servicio
+        FROM ejemplares e JOIN libros l ON l.id = e.libro_id AND l.activo = TRUE`;
+    const [rows] = await connection.query(sql);
+    return rows[0];
+};
+
 // Catálogo consultable para el módulo de pedidos (Grupo 4)
 export const listarLibrosParaPedido = async (busqueda = "") => {
     const termino = `%${String(busqueda).trim()}%`;

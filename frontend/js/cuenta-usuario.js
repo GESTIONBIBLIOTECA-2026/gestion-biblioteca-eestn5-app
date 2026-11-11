@@ -8,6 +8,7 @@
 
 import { escapar, fechaCorta } from "./ui.js";
 import { textoPlazo, plural } from "./inicio-usuario-ui.js";
+import { crearCredencialIdentificadorHTML } from "./qr.js";
 
 const $ = (selector) => document.querySelector(selector);
 
@@ -35,6 +36,11 @@ export function mostrarCredencial(usuario) {
     $("#credencialDatos").innerHTML = datos.map(([etiqueta, valor]) => `<div><dt>${etiqueta}</dt><dd>${escapar(valor)}</dd></div>`).join("");
     $("#estadoCuenta").textContent = texto;
     $("#estadoCuenta").className = `estado-cuenta estado ${clase}`;
+
+    const qrContenedor = $("#credencialQr");
+    if (qrContenedor) {
+        qrContenedor.innerHTML = crearCredencialIdentificadorHTML({ dni: usuario.dni, id: usuario.id });
+    }
 }
 
 

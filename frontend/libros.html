@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="es" class="verificando-sesion" data-acceso="admin">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Gestión de Catálogo - Biblioteca Invaluable</title>
+
+    <!-- Tema claro / oscuro (va primero para que no parpadee) -->
+    <script src="js/tema.js"></script>
+
+    <!-- Estilos generales y componentes compartidos -->
+    <link rel="stylesheet" href="css/estilo-general.css">
+    <link rel="stylesheet" href="css/componentes.css">
+
+    <!-- Estilos exclusivos de esta página -->
+    <link rel="stylesheet" href="css/libros.css">
+
+    <!-- Fuente Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Iconos Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <!-- menu-compacto: el menú lateral muestra solo los íconos hasta pasar el mouse -->
+    <div class="layout-dashboard menu-compacto">
+
+        <!-- BARRA LATERAL -->
+        <aside class="sidebar">
+
+            <a href="panel.html" class="sidebar-logo" aria-label="Ir al inicio">
+
+                <div class="sidebar-logo-icono">
+                    <i data-lucide="book-open"></i>
+                </div>
+
+                <div class="sidebar-logo-texto">
+                    <h2>BIBLIOTECA</h2>
+                    <p>INVALUABLE</p>
+                </div>
+
+            </a>
+
+            <nav class="sidebar-nav" aria-label="Menú principal">
+
+                <a href="panel.html" class="nav-item" title="Inicio">
+                    <i data-lucide="house"></i>
+                    <span>Inicio</span>
+                </a>
+
+                <a href="usuarios.html" class="nav-item" title="Usuarios">
+                    <i data-lucide="users"></i>
+                    <span>Usuarios</span>
+                </a>
+
+                <a href="pedidos.html" class="nav-item" title="Mesa de entrada">
+                    <i data-lucide="book-open-check"></i>
+                    <span>Mesa de entrada</span>
+                </a>
+
+                <a href="libros.html" class="nav-item activo" aria-current="page" title="Libros">
+                    <i data-lucide="book"></i>
+                    <span>Libros</span>
+                </a>
+
+                <a href="reportes.html" class="nav-item" title="Reportes">
+                    <i data-lucide="chart-no-axes-column"></i>
+                    <span>Reportes</span>
+                </a>
+
+                <a href="configuracion.html" class="nav-item" title="Configuración">
+                    <i data-lucide="settings"></i>
+                    <span>Configuración</span>
+                </a>
+
+            </nav>
+
+        </aside>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <div class="contenido-principal">
+
+            <!-- ENCABEZADO SUPERIOR -->
+            <header class="encabezado-superior">
+
+                <p class="titulo-encabezado">Panel de Administración</p>
+
+                <div class="encabezado-derecha">
+
+                    <div class="info-fecha-hora">
+
+                        <div class="item-fecha-hora">
+                            <i data-lucide="calendar"></i>
+                            <span data-fecha-hoy></span>
+                        </div>
+
+                        <div class="item-fecha-hora">
+                            <i data-lucide="clock"></i>
+                            <span id="reloj-actual">--:--</span>
+                        </div>
+
+                    </div>
+
+                    <!-- MENÚ DEL PERFIL (js/menu-perfil.js) -->
+                    <div class="menu-perfil" data-menu-perfil>
+
+                        <button
+                            type="button"
+                            class="usuario-perfil"
+                            data-abrir-menu-perfil
+                            aria-haspopup="menu"
+                            aria-expanded="false"
+                            aria-controls="menuPerfil"
+                        >
+                            <span class="avatar-usuario">
+                                <i data-lucide="user-round"></i>
+                            </span>
+
+                            <span class="nombre-perfil" data-nombre-admin>Admin</span>
+
+                            <i data-lucide="chevron-down" class="flecha-perfil"></i>
+                        </button>
+
+                        <div class="menu-perfil-lista" id="menuPerfil" role="menu" aria-label="Opciones del perfil" hidden>
+
+                            <div class="menu-perfil-cabecera">
+                                <strong data-nombre-admin>Admin</strong>
+                                <span data-rol-admin>Administrador</span>
+                            </div>
+
+                            <a href="configuracion.html" class="menu-perfil-opcion" role="menuitem">
+                                <i data-lucide="user-cog"></i>
+                                <span class="texto-opcion">Ajustes del perfil</span>
+                            </a>
+
+                            <!-- Apariencia: el switch cambia entre luna (oscuro) y sol (claro) -->
+                            <button
+                                type="button"
+                                class="menu-perfil-opcion"
+                                role="menuitemcheckbox"
+                                aria-checked="false"
+                                aria-label="Apariencia: modo claro"
+                                data-cambiar-tema
+                            >
+                                <i data-lucide="palette"></i>
+                                <span class="texto-opcion">Apariencia</span>
+                                <span class="switch-tema" aria-hidden="true">
+                                    <i data-lucide="moon" class="switch-tema-fondo fondo-luna"></i>
+                                    <i data-lucide="sun" class="switch-tema-fondo fondo-sol"></i>
+                                    <span class="switch-tema-perilla">
+                                        <i data-lucide="moon" data-icono-tema="oscuro"></i>
+                                        <i data-lucide="sun" data-icono-tema="claro"></i>
+                                    </span>
+                                </span>
+                            </button>
+
+                            <hr class="menu-perfil-separador">
+
+                            <button type="button" class="menu-perfil-opcion peligro" role="menuitem" data-cerrar-sesion>
+                                <i data-lucide="log-out"></i>
+                                <span class="texto-opcion">Cerrar sesión</span>
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+            <main class="contenedor pagina">
+
+                <!-- TÍTULO Y ACCIÓN PRINCIPAL -->
+                <section class="encabezado-pagina">
+                    <div>
+                        <h1>Gestión de catálogo</h1>
+                        <p>Administrá el alta, modificación, baja y stock de los libros de la biblioteca.</p>
+                    </div>
+
+                    <button type="button" class="boton-principal" id="botonNuevoLibro">
+                        <i data-lucide="book-plus"></i>
+                        Nuevo libro
+                    </button>
+                </section>
+
+                <!-- RESUMEN: GET /api/libros/resumen -->
+                <section class="resumen" aria-label="Resumen del catálogo">
+                    <article class="resumen-item">
+                        <div class="resumen-icono"><i data-lucide="book-marked"></i></div>
+                        <div><span>Títulos catalogados</span><strong id="resumenTitulos">—</strong></div>
+                    </article>
+                    <article class="resumen-item">
+                        <div class="resumen-icono"><i data-lucide="layers"></i></div>
+                        <div><span>Ejemplares totales</span><strong id="resumenEjemplares">—</strong></div>
+                    </article>
+                    <article class="resumen-item">
+                        <div class="resumen-icono verde"><i data-lucide="badge-check"></i></div>
+                        <div><span>Disponibles en el estante</span><strong id="resumenDisponibles">—</strong></div>
+                    </article>
+                    <article class="resumen-item">
+                        <div class="resumen-icono bordo"><i data-lucide="ban"></i></div>
+                        <div><span>Fuera de servicio (baja, reparación, extravío)</span><strong id="resumenFuera">—</strong></div>
+                    </article>
+                </section>
+
+                <!-- CATÁLOGO Y BUSCADOR: GET /api/libros -->
+                <section class="panel" aria-labelledby="tituloCatalogo">
+
+                    <div class="panel-cabecera">
+                        <div class="panel-titulo">
+                            <div class="panel-icono"><i data-lucide="library"></i></div>
+                            <div>
+                                <h2 id="tituloCatalogo">Catálogo de libros <span class="contador-panel" id="totalLibros">0</span></h2>
+                                <p>Buscá, modificá los datos, actualizá el stock o da de baja un título.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form id="formularioFiltros" class="barra-filtros">
+                        <input type="search" name="texto" class="filtro ancho" placeholder="Buscar por título o autor..." aria-label="Buscar por título o autor">
+                        <select name="categoria" class="filtro" aria-label="Filtrar por categoría" data-categorias>
+                            <option value="0">Todas las categorías</option>
+                        </select>
+                        <select name="disponibilidad" class="filtro" aria-label="Filtrar por disponibilidad">
+                            <option value="">Toda la disponibilidad</option>
+                            <option value="disponible">Con ejemplares libres</option>
+                            <option value="agotado">Agotados</option>
+                        </select>
+                        <button type="submit" class="boton-principal"><i data-lucide="search"></i> Buscar</button>
+                        <button type="reset" class="boton-secundario"><i data-lucide="rotate-ccw"></i> Limpiar</button>
+                    </form>
+
+                    <div class="tabla-contenedor">
+                        <table class="tabla">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Libro</th>
+                                    <th scope="col">ISBN</th>
+                                    <th scope="col">Categoría</th>
+                                    <th scope="col">Año</th>
+                                    <th scope="col">Stock</th>
+                                    <th scope="col">Estado</th>
+                                    <th scope="col">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="cuerpoLibros"></tbody>
+                        </table>
+                    </div>
+
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- =========================================================
+         ALTA Y MODIFICACIÓN DE UN LIBRO (POST / PUT /api/libros)
+         ========================================================= -->
+    <dialog id="dialogoLibro" class="dialogo ancho" aria-labelledby="tituloDialogoLibro">
+        <form id="formularioLibro" novalidate>
+
+            <div class="dialogo-cabecera">
+                <div>
+                    <h2 id="tituloDialogoLibro">Registrar libro nuevo</h2>
+                    <p>Los campos con * son obligatorios. Si son varios autores, separalos con coma.</p>
+                </div>
+                <button type="button" class="boton-icono" data-cerrar-dialogo aria-label="Cerrar"><i data-lucide="x"></i></button>
+            </div>
+
+            <div class="formulario">
+                <div class="campos">
+                    <div class="campo doble">
+                        <label for="campoTitulo">Título *</label>
+                        <input id="campoTitulo" name="titulo" type="text" maxlength="200" placeholder="Ej.: El hobbit">
+                        <small class="pista" data-pista="titulo"></small>
+                    </div>
+                    <div class="campo doble">
+                        <label for="campoAutores">Autor/es *</label>
+                        <input id="campoAutores" name="autores" type="text" maxlength="250" placeholder="Ej.: J. R. R. Tolkien">
+                        <small class="pista" data-pista="autores"></small>
+                    </div>
+                    <div class="campo">
+                        <label for="campoEditorial">Editorial</label>
+                        <input id="campoEditorial" name="editorial" type="text" maxlength="100" placeholder="Ej.: Minotauro">
+                        <small class="pista" data-pista="editorial"></small>
+                    </div>
+                    <div class="campo">
+                        <label for="campoIsbn">ISBN</label>
+                        <input id="campoIsbn" name="isbn" type="text" maxlength="20" placeholder="978-950-490-000-1">
+                        <small class="pista" data-pista="isbn"></small>
+                    </div>
+                    <div class="campo">
+                        <label for="campoCategoria">Categoría *</label>
+                        <select id="campoCategoria" name="categoria_id" data-categorias>
+                            <option value="">Elegí una categoría</option>
+                        </select>
+                        <small class="pista" data-pista="categoria_id"></small>
+                    </div>
+                    <div class="campo">
+                        <label for="campoAnio">Año de edición</label>
+                        <input id="campoAnio" name="anio" type="number" min="1450" max="2100" placeholder="Ej.: 2019">
+                        <small class="pista" data-pista="anio"></small>
+                    </div>
+                    <div class="campo" id="grupoCantidad">
+                        <label for="campoCantidad">Ejemplares que ingresan *</label>
+                        <input id="campoCantidad" name="cantidad" type="number" min="1" max="50" value="1">
+                        <small class="pista" data-pista="cantidad"></small>
+                    </div>
+                </div>
+
+                <div class="acciones-formulario">
+                    <button type="button" class="boton-secundario" data-cerrar-dialogo>Cancelar</button>
+                    <button type="submit" class="boton-principal" id="botonGuardarLibro">Guardar libro</button>
+                </div>
+            </div>
+
+        </form>
+    </dialog>
+
+
+    <!-- =========================================================
+         ACTUALIZAR STOCK (PATCH /api/libros/:id/stock)
+         ========================================================= -->
+    <dialog id="dialogoStock" class="dialogo" aria-labelledby="tituloStock">
+        <form id="formularioStock" novalidate>
+
+            <div class="dialogo-cabecera">
+                <div>
+                    <h2 id="tituloStock">Actualizar stock</h2>
+                    <p id="textoStock"></p>
+                </div>
+                <button type="button" class="boton-icono" data-cerrar-dialogo aria-label="Cerrar"><i data-lucide="x"></i></button>
+            </div>
+
+            <div class="formulario">
+                <div class="campo">
+                    <label for="campoCambio">Ejemplares a sumar o sacar *</label>
+                    <input id="campoCambio" name="cambio" type="number" min="-50" max="50" placeholder="Ej.: 3 (compra o donación) o -1 (extraviado)">
+                    <small class="pista">Positivo suma ejemplares nuevos; negativo da de baja ejemplares que están en el estante.</small>
+                    <small class="pista" data-pista="cambio"></small>
+                </div>
+
+                <div class="acciones-formulario">
+                    <button type="button" class="boton-secundario" data-cerrar-dialogo>Cancelar</button>
+                    <button type="submit" class="boton-principal">Guardar stock</button>
+                </div>
+            </div>
+
+        </form>
+    </dialog>
+
+
+    <!-- =========================================================
+         CONFIRMAR BAJA DEL TÍTULO (DELETE /api/libros/:id)
+         ========================================================= -->
+    <dialog id="dialogoBaja" class="dialogo" aria-labelledby="tituloBaja">
+        <form id="formularioBaja" novalidate>
+
+            <div class="dialogo-cabecera">
+                <div>
+                    <h2 id="tituloBaja">Dar de baja</h2>
+                    <p>Es una baja lógica: el libro deja de aparecer en el catálogo, pero su historial de préstamos se conserva.</p>
+                </div>
+                <button type="button" class="boton-icono" data-cerrar-dialogo aria-label="Cerrar"><i data-lucide="x"></i></button>
+            </div>
+
+            <div class="formulario">
+                <div class="acciones-formulario">
+                    <button type="button" class="boton-secundario" data-cerrar-dialogo>Cancelar</button>
+                    <button type="submit" class="boton-peligro">Dar de baja</button>
+                </div>
+            </div>
+
+        </form>
+    </dialog>
+
+    <!-- AVISO FLOTANTE -->
+    <div id="avisoFlotante" class="aviso-flotante" role="status" aria-live="polite" hidden></div>
+
+
+    <!-- Sesión y encabezado + lógica de la página -->
+    <script type="module" src="js/sesion.js"></script>
+    <script type="module" src="js/libros.js"></script>
+
+    <script>
+        window.lucide?.createIcons();
+    </script>
+
+</body>
+
+</html>

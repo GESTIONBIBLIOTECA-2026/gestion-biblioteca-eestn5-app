@@ -42,4 +42,20 @@ export const comprobarConexion = async () => {
     }
 };
 
+// 5. Transacción atómica: START TRANSACTION, COMMIT y ROLLBACK con release garantizado
+export const conTransaccion = async (trabajo) => {
+    const conexion = await connection.getConnection();
+    try {
+        await conexion.beginTransaction();
+        const resultado = await trabajo(conexion);
+        await conexion.commit();
+        return resultado;
+    } catch (error) {
+        await conexion.rollback();
+        throw error;
+    } finally {
+        conexion.release();
+    }
+};
+
 export default connection;

@@ -126,7 +126,78 @@
 .credencial-cuerpo {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 16px;
+    flex-wrap: wrap;
+}
+
+.credencial-info {
+    flex: 1;
+    min-width: 160px;
+}
+
+.credencial-qr-caja {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.credencial-qr-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 10px;
+    background: #ffffff;
+    color: #0b1329;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.credencial-qr-marco {
+    width: 90px;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.credencial-qr-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.credencial-qr-offline {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    color: #475569;
+    font-size: 11px;
+}
+
+.credencial-barcode-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    width: 100%;
+}
+
+.barcode-svg {
+    width: 100%;
+    max-width: 110px;
+    height: 24px;
+    color: #000000;
+}
+
+.credencial-barcode-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: #1e293b;
 }
 
 .credencial h2 {

@@ -186,6 +186,15 @@
                     </div>
                 </section>
 
+                <!-- BANNER DE ADVERTENCIA POR SANCIÓN O MORA (js/catalogo.js) -->
+                <div id="bannerSancion" class="banner-alerta" hidden>
+                    <i data-lucide="shield-alert"></i>
+                    <div>
+                        <h3 id="bannerTitulo">Cuenta no habilitada para reservas</h3>
+                        <p id="bannerMensaje">Tenés préstamos vencidos o una suspensión activa. Acercate al mostrador de la biblioteca para regularizar tu situación.</p>
+                    </div>
+                </div>
+
                 <!-- BUSCADOR: filtra en vivo mientras escribís -->
                 <section class="panel" aria-labelledby="tituloBuscador">
 
@@ -217,6 +226,48 @@
     </div>
 
 
+
+    <!-- DIÁLOGO MODAL: CONFIRMAR RESERVA DE LIBRO -->
+    <dialog id="dialogoReserva" class="dialogo-reserva" aria-labelledby="tituloDialogoReserva">
+        <form id="formularioReserva" class="dialogo-reserva-contenido" method="dialog">
+            <div class="dialogo-reserva-cabecera">
+                <div>
+                    <h2 id="tituloDialogoReserva">Reservar libro</h2>
+                    <p id="subtituloDialogoReserva">Confirmá los datos para apartar tu ejemplar.</p>
+                </div>
+                <button type="button" class="boton-icono" id="btnCerrarModalReserva" aria-label="Cerrar ventana">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+
+            <div class="dialogo-reserva-cuerpo">
+                <input type="hidden" name="libro_id" id="reservaLibroId">
+
+                <div class="dialogo-campo">
+                    <label for="reservaTitulo">Libro seleccionado</label>
+                    <input type="text" id="reservaTitulo" readonly>
+                </div>
+
+                <div class="dialogo-campo">
+                    <label for="reservaFecha">Fecha estimada de devolución</label>
+                    <input type="date" name="fecha_devolucion" id="reservaFecha" required>
+                </div>
+
+                <div class="dialogo-reserva-info">
+                    <i data-lucide="info"></i>
+                    <span>Tu pedido quedará en estado <strong>Pendiente</strong>. Tendrás 48 horas para retirarlo por el mostrador antes de que vuelva al catálogo.</span>
+                </div>
+            </div>
+
+            <div class="dialogo-reserva-acciones">
+                <button type="button" class="boton-secundario" id="btnCancelarReserva">Cancelar</button>
+                <button type="submit" class="boton-principal" id="btnConfirmarReserva">
+                    <i data-lucide="check"></i>
+                    <span>Confirmar reserva</span>
+                </button>
+            </div>
+        </form>
+    </dialog>
 
     <!-- AVISO FLOTANTE -->
     <div id="avisoFlotante" class="aviso-flotante" role="status" aria-live="polite" hidden></div>

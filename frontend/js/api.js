@@ -44,12 +44,46 @@ async function pedir(ruta, metodo = "GET", datos = null) {
 export const iniciarSesion = (dni, clave) => pedir("/auth/login", "POST", { dni, clave });
 export const obtenerSesionActual = () => pedir("/auth/perfil");
 
-// --- Catálogo de libros (Grupo 6) · solo lectura ---
+// --- Inicio del administrador / Dashboard ---
+export const obtenerMetricas = () => pedir("/dashboard");   // { libros_total, prestamos_activos, alumnos_morosos }
+export const obtenerUltimosPrestamos = (limite = 5) => pedir(`/prestamos?limite=${limite}`);
+
+// --- Usuarios (Grupo 5) ---
+export const listarUsuarios = (filtros = {}) => pedir(`/usuarios?${new URLSearchParams(filtros)}`);
+export const obtenerUsuario = (id) => pedir(`/usuarios/${id}`);
+export const obtenerHistorial = (id) => pedir(`/usuarios/${id}/historial`);
+export const registrarUsuario = (datos) => pedir("/usuarios", "POST", datos);
+export const modificarUsuario = (id, datos) => pedir(`/usuarios/${id}`, "PUT", datos);
+export const cambiarEstado = (id, estado, motivo = "") => pedir(`/usuarios/${id}/estado`, "PATCH", { estado, motivo });
+export const obtenerCursos = () => pedir("/cursos");
+
+// --- Libros: catálogo e inventario (Grupo 6) ---
 export const listarLibros = (filtros = {}) => pedir(`/libros?${new URLSearchParams(filtros)}`);
+export const obtenerResumenLibros = () => pedir("/libros/resumen");
 export const obtenerCategorias = () => pedir("/libros/categorias");
+export const registrarLibro = (datos) => pedir("/libros", "POST", datos);
+export const modificarLibro = (id, datos) => pedir(`/libros/${id}`, "PUT", datos);
+export const cambiarStock = (id, cambio) => pedir(`/libros/${id}/stock`, "PATCH", { cambio });
+export const darDeBajaLibro = (id) => pedir(`/libros/${id}`, "DELETE");
+
+// --- Mesa de entrada y préstamos mostrador (Grupo 4) ---
+export const listarPrestamos = (params = {}) => pedir(`/prestamos?${new URLSearchParams(params)}`);
+export const cambiarEstadoPedido = (id, estado) => pedir(`/prestamos/${id}/estado`, "PATCH", { estado });
+export const actualizarVencidos = () => pedir("/prestamos/actualizar-vencidos", "POST");
 
 // --- Mi perfil ---
 export const obtenerMiPerfil = () => pedir("/perfil");
 export const guardarMiPerfil = (datos) => pedir("/perfil", "PUT", datos);
 export const cambiarMiClave = (datos) => pedir("/perfil/clave", "PUT", datos);
 export const obtenerMiCuenta = () => pedir("/perfil/historial");   // inicio del alumno / docente
+
+// --- Pedidos y reservas del alumno (Grupo 4) ---
+export const solicitarReserva = ({ libroId, cantidad = 1, fechaDevolucion }) =>
+    pedir("/mis-pedidos", "POST", {
+        libro_id: libroId,
+        cantidad,
+        fecha_devolucion_estimada: fechaDevolucion
+    });
+export const obtenerMisPedidos = () => pedir("/mis-pedidos/historial");
+export const obtenerPerfilAlumno = () => pedir("/mis-pedidos/perfil");
+

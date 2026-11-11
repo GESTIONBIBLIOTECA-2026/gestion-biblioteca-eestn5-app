@@ -27,6 +27,17 @@ export function fechaDeHoy() {
     return texto.charAt(0).toUpperCase() + texto.slice(1);
 }
 
+/* --- Iniciales de un nombre: "Franco Barufaldi" → "FB" --- */
+export const iniciales = (nombre) =>
+    String(nombre ?? "").split(" ").filter(Boolean).slice(0, 2).map((parte) => parte[0]).join("").toUpperCase();
+
+/* --- Cierre accesible de <dialog> con botones [data-cerrar-dialogo] --- */
+export function activarCierreDialogos() {
+    document.addEventListener("click", (evento) => {
+        evento.target.closest("[data-cerrar-dialogo]")?.closest("dialog")?.close();
+    });
+}
+
 /* --- Aviso flotante abajo a la derecha (#avisoFlotante) --- */
 let temporizador;
 
@@ -56,6 +67,22 @@ export function marcarCampos(formulario, campos = {}) {
 /* ==========================================================================
    PLANTILLAS HTML GENERALES
    ========================================================================== */
+
+/* --- Fila de la tabla de préstamos en el panel de inicio --- */
+export function crearFilaPrestamoHTML(prestamo) {
+    const { nombre_completo, titulo, fecha_prestamo, fecha_devolucion_estimada, fecha_devolucion_real, estado, dias_atraso } = prestamo;
+    const atrasado = estado === "vencido" || dias_atraso > 0;
+    const etiqueta = estado === "devuelto" ? ["Devuelto", "devuelto"] : atrasado ? ["Atrasado", "atrasado"] : ["En curso", "en-curso"];
+
+    return `
+        <tr>
+            <td>${escapar(nombre_completo)}</td>
+            <td>${escapar(titulo)}</td>
+            <td>${fechaCorta(fecha_prestamo)}</td>
+            <td>${fechaCorta(fecha_devolucion_real ?? fecha_devolucion_estimada)}</td>
+            <td><span class="estado ${etiqueta[1]}">${etiqueta[0]}</span></td>
+        </tr>`;
+}
 
 // Fila con un mensaje que ocupa toda la tabla (cargando, vacío o error)
 export const crearFilaMensajeHTML = (texto, columnas) =>

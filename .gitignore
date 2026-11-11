@@ -4,3 +4,4 @@ node_modules/
 # Variables de entorno y certificado (secretos)
 .env
 ca.pem
+.vercel

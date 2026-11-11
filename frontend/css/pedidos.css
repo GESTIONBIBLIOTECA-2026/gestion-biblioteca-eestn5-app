@@ -1,0 +1,173 @@
+/* =========================================================
+   PEDIDOS Y PRÉSTAMOS - MESA DE ENTRADA (pedidos.html)
+   Estilos exclusivos del mostrador bibliotecario.
+   ========================================================= */
+
+.pagina-pedidos {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.filtros-estados-pedidos {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--borde-tarjeta);
+}
+
+.tab-estado {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border: 1px solid transparent;
+    border-radius: 20px;
+    background: var(--superficie-sutil);
+    color: var(--texto-secundario);
+    font: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .2s ease;
+}
+
+.tab-estado:hover {
+    background: var(--superficie-hover);
+    color: var(--texto-principal);
+}
+
+.tab-estado.activo {
+    background: var(--azul-suave);
+    border-color: var(--azul-400);
+    color: var(--azul-500);
+}
+
+.contador-tab {
+    padding: 2px 8px;
+    border-radius: 10px;
+    background: var(--superficie-activa);
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.tab-estado.activo .contador-tab {
+    background: var(--azul-500);
+    color: #ffffff;
+}
+
+.contenedor-input-buscar {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.contenedor-input-buscar svg {
+    position: absolute;
+    left: 14px;
+    width: 18px;
+    height: 18px;
+    color: var(--texto-mutado);
+    pointer-events: none;
+}
+
+.contenedor-input-buscar input {
+    width: 100%;
+    padding: 12px 16px 12px 42px;
+    border: 1px solid var(--borde-tarjeta);
+    border-radius: 10px;
+    background: var(--fondo-campo);
+    color: var(--texto-principal);
+    font: inherit;
+    font-size: 14px;
+}
+
+.contenedor-input-buscar input:focus {
+    outline: none;
+    border-color: var(--azul-400);
+}
+
+/* Identidades y acciones en la tabla */
+.pedido-alumno strong {
+    display: block;
+    color: var(--texto-principal);
+    font-size: 14px;
+}
+
+.pedido-alumno small {
+    color: var(--texto-secundario);
+    font-size: 12px;
+}
+
+.pedido-libro strong {
+    display: block;
+    color: var(--texto-principal);
+    font-size: 14px;
+}
+
+.pedido-libro small {
+    color: var(--texto-mutado);
+    font-size: 12px;
+}
+
+.acciones-mostrador {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.boton-accion-mostrador {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    font: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .15s ease;
+}
+
+.boton-accion-mostrador svg {
+    width: 14px;
+    height: 14px;
+}
+
+.boton-entregar {
+    background: var(--verde-fondo);
+    border-color: var(--verde-borde);
+    color: var(--verde-600);
+}
+
+.boton-entregar:hover {
+    background: var(--verde-600);
+    color: #ffffff;
+}
+
+.boton-devolver {
+    background: var(--azul-suave);
+    border-color: var(--azul-suave-borde);
+    color: var(--azul-500);
+}
+
+.boton-devolver:hover {
+    background: var(--azul-700);
+    color: #ffffff;
+}
+
+.boton-cancelar {
+    background: var(--rojo-fondo);
+    border-color: var(--rojo-borde);
+    color: var(--rojo-500);
+}
+
+.boton-cancelar:hover {
+    background: var(--rojo-600);
+    color: #ffffff;
+}
+

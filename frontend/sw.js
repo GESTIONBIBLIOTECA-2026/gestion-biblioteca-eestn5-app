@@ -8,7 +8,7 @@
    para que los celulares descarguen los archivos nuevos.
    ========================================================================== */
 
-const CACHE_NAME = "biblioteca-app-v4";   // App Shell (HTML, CSS, JS, íconos)
+const CACHE_NAME = "biblioteca-app-v5";   // App Shell (HTML, CSS, JS, íconos)
 const CACHE_API = "biblioteca-api-v1";    // últimas respuestas GET de la API
 
 // App Shell: lo mínimo para dibujar la app sin internet.
@@ -16,6 +16,10 @@ const CACHE_API = "biblioteca-api-v1";    // últimas respuestas GET de la API
 const RECURSOS_APP_SHELL = [
     "./",
     "index.html",
+    "panel.html",
+    "pedidos.html",
+    "prestamos.html",
+    "libros.html",
     "inicio-usuario.html",
     "catalogo.html",
     "configuracion.html",
@@ -26,25 +30,33 @@ const RECURSOS_APP_SHELL = [
     "css/estilo-general.css",
     "css/componentes.css",
     "css/login.css",
+    "css/index.css",
     "css/inicio-base.css",
     "css/inicio-usuario.css",
     "css/catalogo.css",
     "css/configuracion.css",
+    "css/pedidos.css",
+    "css/libros.css",
     "css/nav-inferior.css",
     "css/usuarios.css",
     "js/config.js",
     "js/api.js",
+    "js/qr.js",
     "js/storage.js",
     "js/tema.js",
     "js/ui.js",
     "js/sesion.js",
     "js/pwa.js",
     "js/login.js",
+    "js/inicio.js",
+    "js/pedidos.js",
     "js/inicio-usuario.js",
     "js/inicio-usuario-ui.js",
     "js/cuenta-usuario.js",
     "js/catalogo.js",
+    "js/libros.js",
     "js/libros-ui.js",
+    "js/libros-dialogos.js",
     "js/configuracion.js",
     "js/usuarios.js",
     "js/usuarios-ui.js",

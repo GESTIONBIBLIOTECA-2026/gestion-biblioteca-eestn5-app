@@ -34,7 +34,7 @@ async function revisarSesion() {
 
     try {
         const sesion = await obtenerSesionActual();
-        const destino = sesion.payload?.rol === "administrador" ? "usuarios.html" : PAGINA_INICIO;
+        const destino = sesion.payload?.rol === "administrador" ? "panel.html" : PAGINA_INICIO;
         window.location.replace(destino);
     } catch (error) {
         // Token vencido o servidor apagado: se queda en el login
@@ -66,7 +66,7 @@ formulario.addEventListener("submit", async (evento) => {
         // POST /api/auth/login → { token, usuario }
         const { payload } = await iniciarSesion(campoDni.value.trim(), campoClave.value);
         guardarSesion(payload);
-        const destino = payload?.usuario?.rol === "administrador" ? "usuarios.html" : PAGINA_INICIO;
+        const destino = payload?.usuario?.rol === "administrador" ? "panel.html" : PAGINA_INICIO;
         window.location.href = destino;
 
     } catch (error) {
