@@ -8,7 +8,7 @@
    para que los celulares descarguen los archivos nuevos.
    ========================================================================== */
 
-const CACHE_NAME = "biblioteca-app-v5";   // App Shell (HTML, CSS, JS, íconos)
+const CACHE_NAME = "biblioteca-app-v7";   // App Shell (HTML, CSS, JS, íconos)
 const CACHE_API = "biblioteca-api-v1";    // últimas respuestas GET de la API
 
 // App Shell: lo mínimo para dibujar la app sin internet.
@@ -22,6 +22,7 @@ const RECURSOS_APP_SHELL = [
     "libros.html",
     "inicio-usuario.html",
     "catalogo.html",
+    "mis-prestamos.html",
     "configuracion.html",
     "usuarios.html",
     "manifest.json",
@@ -34,6 +35,7 @@ const RECURSOS_APP_SHELL = [
     "css/inicio-base.css",
     "css/inicio-usuario.css",
     "css/catalogo.css",
+    "css/mis-prestamos.css",
     "css/configuracion.css",
     "css/pedidos.css",
     "css/libros.css",
@@ -54,6 +56,10 @@ const RECURSOS_APP_SHELL = [
     "js/inicio-usuario-ui.js",
     "js/cuenta-usuario.js",
     "js/catalogo.js",
+    "js/mis-prestamos.js",
+    "js/mis-prestamos-ui.js",
+    "js/mis-prestamos-render.js",
+    "js/mis-prestamos-dialogo.js",
     "js/libros.js",
     "js/libros-ui.js",
     "js/libros-dialogos.js",

@@ -26,13 +26,14 @@ el backend responde `403`).
 │   ├── index.html                inicio de sesión (start_url de la app)
 │   ├── inicio-usuario.html       mi cuenta: credencial digital, préstamos, reservas, historial y sanciones
 │   ├── catalogo.html             buscador de libros con disponibilidad (Grupo 6)
+│   ├── mis-prestamos.html        mis pedidos y préstamos: pedir un libro, reservas y devoluciones (Grupo 4)
 │   ├── configuracion.html        mis datos, contraseña y apariencia
 │   ├── manifest.json             PWA: nombre, colores, íconos y display "standalone"
 │   ├── sw.js                     PWA: Service Worker (App Shell en caché + datos offline)
 │   ├── assets/icons/             icon-192x192.png e icon-512x512.png (maskable)
 │   ├── css/                      estilo-general.css (temas, menú lateral, encabezado, botones), componentes.css
 │   │                             (paneles, filtros, etiquetas), login.css, inicio-base.css, inicio-usuario.css,
-│   │                             catalogo.css, configuracion.css
+│   │                             catalogo.css, mis-prestamos.css, configuracion.css
 │   └── js/                       ES Modules (import / export), cada archivo ~100 líneas o menos
 │       ├── config.js             URL del backend
 │       ├── api.js                fetch al backend (async/await, response.ok, AbortSignal)
@@ -47,6 +48,10 @@ el backend responde `403`).
 │       ├── cuenta-usuario.js     credencial digital, aviso de la cuenta y sanciones
 │       ├── catalogo.js           catalogo.html: buscador en vivo con filtros combinados
 │       ├── libros-ui.js          plantilla de la tarjeta de libro y estado del stock
+│       ├── mis-prestamos.js      mis-prestamos.html: carga los datos, filtros y actualización
+│       ├── mis-prestamos-ui.js   plantillas de los pedidos, filtros y búsqueda del catálogo
+│       ├── mis-prestamos-render.js  dibuja las métricas, el catálogo y la lista de pedidos
+│       ├── mis-prestamos-dialogo.js diálogo para pedir un libro (cantidad, fecha y envío)
 │       └── configuracion.js      configuracion.html: mis datos y contraseña
 │
 └── backend/                      MVC: index.js ➔ Router ➔ Controller ➔ Model ➔ MySQL
@@ -71,12 +76,17 @@ el backend responde `403`).
 
 | Método | Ruta | Qué hace |
 |---|---|---|
-| `POST` | `/api/auth/login` | Body `{ "dni", "clave" }` → `{ payload: { token, usuario } }`. Si es administrador → `403` |
+| `POST` | `/api/auth/login` | Body `{ "dni", "clave" }` → `{ payload: { token, usuario } }`. Si el usuario está dado de baja → `403`. Un administrador entra igual y el frontend lo manda al panel |
 | `GET` | `/api/auth/perfil` | Quién está logueado → `{ payload: { id, nombre, rol } }` |
 | `GET` | `/api/perfil` | Mis datos completos (pantalla Configuración) |
 | `PUT` | `/api/perfil` | Body `{ nombre_completo, correo, telefono, direccion }` (el DNI y el rol no se cambian desde acá) |
 | `PUT` | `/api/perfil/clave` | Body `{ clave_actual, clave_nueva, confirmacion }` |
 | `GET` | `/api/perfil/historial` | Mi cuenta: mis datos, préstamos con `dias_restantes`, reservas y sanciones |
+| **Grupo 4 (mis pedidos, solo alumnos)** | | |
+| `GET` | `/api/mis-pedidos/perfil` | Mi condición (`habilitado`, `atraso`, `suspendido`) y si puedo pedir (`puede_pedir`) |
+| `GET` | `/api/mis-pedidos/libros?q=` | Catálogo para pedir, con `stock_reservable` (lo disponible menos lo ya reservado) |
+| `GET` | `/api/mis-pedidos/historial` | Mis pedidos con estado, fechas y `dias_atraso` |
+| `POST` | `/api/mis-pedidos` | Body `{ libro_id, cantidad, fecha_devolucion_estimada }` → crea el pedido en estado `pendiente`. La biblioteca lo confirma desde el panel y ahí recién reserva el ejemplar |
 | **Grupo 6 (integrado, solo lectura)** | | |
 | `GET` | `/api/libros?texto=&categoria=&disponibilidad=` | Catálogo con stock. `disponibilidad`: `disponible` o `agotado` |
 | `GET` | `/api/libros/:id` | Un libro con autores, editorial, categoría y stock |
@@ -91,7 +101,7 @@ Si un dato está mal, la API responde `400` con `{ error, campos: { correo: "...
 | Pieza | Archivo | Qué hace |
 |---|---|---|
 | Manifiesto | `frontend/manifest.json` | Nombre, `short_name` "Biblioteca", `start_url` `index.html`, `display: "standalone"`, colores e íconos |
-| Vinculación | `<head>` de las 4 páginas | `<link rel="manifest">`, `theme-color` y las meta etiquetas de iOS (`apple-mobile-web-app-*`) |
+| Vinculación | `<head>` de las 5 páginas | `<link rel="manifest">`, `theme-color` y las meta etiquetas de iOS (`apple-mobile-web-app-*`) |
 | Registro | `frontend/js/pwa.js` | `navigator.serviceWorker.register("sw.js")` cuando carga la página |
 | Service Worker | `frontend/sw.js` | `install` (pre-cachea el App Shell), `activate` (borra cachés viejas), `fetch` (estrategias) |
 | Instalación | `frontend/js/pwa.js` | Captura `beforeinstallprompt` y muestra el botón **Instalar app** (login y menú lateral) |
