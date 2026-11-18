@@ -1,0 +1,85 @@
+/* =========================================================
+   MIS PRÉSTAMOS (alumnos) - ESTILOS EXCLUSIVOS
+   Reutiliza estilo-general.css, componentes.css,
+   inicio-base.css, inicio-usuario.css y catalogo.css.
+   Acá solo va lo propio de esta página.
+========================================================= */
+
+/* --- Contenido de los paneles --- */
+.mp-cuerpo {
+    padding: 18px 24px 24px;
+}
+
+.mp-banner {
+    margin: 18px 24px 0;
+}
+
+/* --- Cantidad de ejemplares dentro del título de un pedido --- */
+.mp-cantidad {
+    display: block;
+    margin-top: 2px;
+    color: var(--texto-mutado);
+    font-size: 11px;
+    font-weight: 500;
+}
+
+/* --- Texto de ayuda del diálogo --- */
+.mp-ayuda {
+    color: var(--texto-mutado);
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+/* --- Error de validación del pedido --- */
+.mp-error:not([hidden]) {
+    display: block;
+    padding: 10px 12px;
+    border: 1px solid var(--rojo-borde);
+    border-radius: 8px;
+    background: var(--rojo-fondo);
+    color: var(--rojo-500);
+    font-size: 12px;
+    line-height: 1.45;
+}
+
+/* --- El campo "Libro seleccionado" es de solo lectura --- */
+.dialogo-campo input[readonly] {
+    color: var(--texto-secundario);
+    cursor: default;
+}
+
+/* --- Barra de filtros y grilla dentro del panel --- */
+#panelPedir .barra-filtros {
+    padding: 16px 24px;
+}
+
+#panelPedir .grilla-libros {
+    padding: 20px 24px 24px;
+}
+
+/* --- Pedidos: en pantallas chicas el estado no se sale de la tarjeta --- */
+@media (max-width: 600px) {
+    .mp-cuerpo {
+        padding: 16px 18px 18px;
+    }
+
+    .mp-banner {
+        margin: 16px 18px 0;
+    }
+
+    #panelPedir .barra-filtros {
+        padding: 16px 18px;
+    }
+
+    #panelPedir .grilla-libros {
+        padding: 16px 18px 18px;
+    }
+
+    #listaPedidos .prestamo {
+        flex-wrap: wrap;
+    }
+
+    #listaPedidos .prestamo .estado {
+        margin-left: 64px;
+    }
+}

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="es" class="verificando-sesion">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mis préstamos - Biblioteca Invaluable</title>
+
+    <!-- PWA (clase 07): manifiesto, color de la barra de estado y soporte para iOS -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0b1329">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Biblioteca">
+    <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+
+    <!-- Tema claro / oscuro (va primero para que no parpadee) -->
+    <script src="js/tema.js"></script>
+
+    <!-- Estilos generales, componentes y base del inicio (métricas y estados) -->
+    <link rel="stylesheet" href="css/estilo-general.css">
+    <link rel="stylesheet" href="css/componentes.css">
+    <link rel="stylesheet" href="css/inicio-base.css">
+    <link rel="stylesheet" href="css/inicio-usuario.css">
+
+    <!-- Estilos del catálogo (tarjetas, banner y diálogo de reserva) -->
+    <link rel="stylesheet" href="css/catalogo.css">
+
+    <!-- Estilos exclusivos de esta página -->
+    <link rel="stylesheet" href="css/mis-prestamos.css">
+
+    <!-- Fuente Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Iconos Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <!-- menu-compacto: el menú lateral muestra solo los íconos hasta pasar el mouse -->
+    <div class="layout-dashboard menu-compacto">
+
+        <!-- BARRA LATERAL -->
+        <aside class="sidebar">
+
+            <a href="inicio-usuario.html" class="sidebar-logo" aria-label="Ir al inicio">
+
+                <div class="sidebar-logo-icono">
+                    <i data-lucide="book-open"></i>
+                </div>
+
+                <div class="sidebar-logo-texto">
+                    <h2>BIBLIOTECA</h2>
+                    <p>INVALUABLE</p>
+                </div>
+
+            </a>
+
+            <nav class="sidebar-nav" aria-label="Menú principal">
+
+                <a href="inicio-usuario.html" class="nav-item" title="Inicio">
+                    <i data-lucide="house"></i>
+                    <span>Inicio</span>
+                </a>
+
+                <a href="catalogo.html" class="nav-item" title="Catálogo">
+                    <i data-lucide="book"></i>
+                    <span>Catálogo</span>
+                </a>
+
+                <a href="mis-prestamos.html" class="nav-item activo" aria-current="page" title="Mis préstamos">
+                    <i data-lucide="book-marked"></i>
+                    <span>Mis préstamos</span>
+                </a>
+
+                <a href="configuracion.html" class="nav-item" title="Configuración">
+                    <i data-lucide="settings"></i>
+                    <span>Configuración</span>
+                </a>
+
+            </nav>
+
+        </aside>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <div class="contenido-principal">
+
+            <!-- ENCABEZADO SUPERIOR -->
+            <header class="encabezado-superior">
+
+                <p class="titulo-encabezado">Mi biblioteca</p>
+
+                <div class="encabezado-derecha">
+
+                    <!-- INSTALAR LA APP (PWA · js/pwa.js): oculto hasta que el navegador lo permite -->
+                    <button type="button" id="btn-instalar-app" class="boton-principal boton-instalar" hidden>
+                        <i data-lucide="download"></i>
+                        <span>Instalar app</span>
+                    </button>
+
+                    <div class="info-fecha-hora">
+
+                        <div class="item-fecha-hora">
+                            <i data-lucide="calendar"></i>
+                            <span data-fecha-hoy></span>
+                        </div>
+
+                        <div class="item-fecha-hora">
+                            <i data-lucide="clock"></i>
+                            <span id="reloj-actual">--:--</span>
+                        </div>
+
+                    </div>
+
+                    <!-- MENÚ DEL PERFIL (js/sesion.js) -->
+                    <div class="menu-perfil" data-menu-perfil>
+
+                        <button
+                            type="button"
+                            class="usuario-perfil"
+                            data-abrir-menu-perfil
+                            aria-haspopup="menu"
+                            aria-expanded="false"
+                            aria-controls="menuPerfil"
+                        >
+                            <span class="avatar-usuario">
+                                <i data-lucide="user-round"></i>
+                            </span>
+
+                            <span class="nombre-perfil" data-nombre-usuario>Usuario</span>
+
+                            <i data-lucide="chevron-down" class="flecha-perfil"></i>
+                        </button>
+
+                        <div class="menu-perfil-lista" id="menuPerfil" role="menu" aria-label="Opciones del perfil" hidden>
+
+                            <div class="menu-perfil-cabecera">
+                                <strong data-nombre-usuario>Usuario</strong>
+                                <span data-rol-usuario>Alumno</span>
+                            </div>
+
+                            <a href="configuracion.html" class="menu-perfil-opcion" role="menuitem">
+                                <i data-lucide="user-cog"></i>
+                                <span class="texto-opcion">Ajustes del perfil</span>
+                            </a>
+
+                            <!-- Apariencia: el switch cambia entre luna (oscuro) y sol (claro) -->
+                            <button
+                                type="button"
+                                class="menu-perfil-opcion"
+                                role="menuitemcheckbox"
+                                aria-checked="false"
+                                aria-label="Apariencia: modo claro"
+                                data-cambiar-tema
+                            >
+                                <i data-lucide="palette"></i>
+                                <span class="texto-opcion">Apariencia</span>
+                                <span class="switch-tema" aria-hidden="true">
+                                    <i data-lucide="moon" class="switch-tema-fondo fondo-luna"></i>
+                                    <i data-lucide="sun" class="switch-tema-fondo fondo-sol"></i>
+                                    <span class="switch-tema-perilla">
+                                        <i data-lucide="moon" data-icono-tema="oscuro"></i>
+                                        <i data-lucide="sun" data-icono-tema="claro"></i>
+                                    </span>
+                                </span>
+                            </button>
+
+                            <hr class="menu-perfil-separador">
+
+                            <button type="button" class="menu-perfil-opcion peligro" role="menuitem" data-cerrar-sesion>
+                                <i data-lucide="log-out"></i>
+                                <span class="texto-opcion">Cerrar sesión</span>
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+            <main class="contenedor pagina pagina-usuario">
+
+                <!-- TÍTULO -->
+                <section class="encabezado-pagina">
+                    <div>
+                        <h1>Mis préstamos</h1>
+                        <p>Pedí libros y seguí el estado de tus reservas, préstamos y devoluciones.</p>
+                    </div>
+
+                    <button type="button" id="btnActualizar" class="boton-secundario">
+                        <i data-lucide="refresh-cw"></i>
+                        <span>Actualizar</span>
+                    </button>
+                </section>
+
+                <!-- AVISO IMPORTANTE (suspensión, atraso o vencimiento cercano) -->
+                <div class="aviso-cuenta" id="avisoCuenta" role="alert" hidden></div>
+
+                <!-- NÚMEROS DE MI CUENTA -->
+                <section class="metricas-usuario" id="metricas" aria-label="Resumen de mis préstamos"></section>
+
+                <!-- PEDIR UN LIBRO (solo alumnos: js/mis-prestamos.js lo muestra) -->
+                <section class="panel" id="panelPedir" aria-labelledby="tituloPedir" hidden>
+
+                    <div class="panel-cabecera">
+                        <div class="panel-titulo">
+                            <div class="panel-icono"><i data-lucide="book-plus"></i></div>
+                            <div>
+                                <h2 id="tituloPedir">Pedir un libro <span class="contador-panel" id="contadorLibros">0</span></h2>
+                                <p>Elegí un ejemplar disponible. Tu pedido queda pendiente hasta que la biblioteca lo confirme.</p>
+                            </div>
+                        </div>
+
+                        <a href="catalogo.html" class="boton-secundario">
+                            <i data-lucide="library"></i>
+                            <span>Catálogo completo</span>
+                        </a>
+                    </div>
+
+                    <!-- BANNER DE ADVERTENCIA POR SANCIÓN O MORA -->
+                    <div id="bannerSancion" class="banner-alerta mp-banner" hidden>
+                        <i data-lucide="shield-alert"></i>
+                        <div>
+                            <h3 id="bannerTitulo">Cuenta no habilitada para pedir libros</h3>
+                            <p id="bannerMensaje">Tenés préstamos vencidos o una suspensión activa. Acercate al mostrador de la biblioteca para regularizar tu situación.</p>
+                        </div>
+                    </div>
+
+                    <!-- BUSCADOR Y FILTROS: filtran en vivo sobre la lista ya cargada -->
+                    <form id="formularioFiltros" class="barra-filtros" role="search">
+                        <input
+                            type="search"
+                            name="texto"
+                            class="filtro ancho"
+                            placeholder="Título o autor..."
+                            aria-label="Buscar por título o autor"
+                            autocomplete="off"
+                        >
+                        <select name="categoria" class="filtro" aria-label="Filtrar por categoría" data-categorias>
+                            <option value="0">Todas las categorías</option>
+                        </select>
+                        <label class="casilla">
+                            <input type="checkbox" name="disponibles" checked>
+                            Solo con stock
+                        </label>
+                    </form>
+
+                    <div class="grilla-libros" id="listaLibros" aria-live="polite">
+                        <p class="panel-vacio">Cargando libros...</p>
+                    </div>
+
+                </section>
+
+                <!-- MIS PEDIDOS Y PRÉSTAMOS -->
+                <section class="panel" aria-labelledby="tituloPedidos">
+
+                    <div class="panel-cabecera">
+                        <div class="panel-titulo">
+                            <div class="panel-icono"><i data-lucide="clipboard-list"></i></div>
+                            <div>
+                                <h2 id="tituloPedidos">Mis pedidos y préstamos <span class="contador-panel" id="contadorPedidos">0</span></h2>
+                                <p>Reservas pendientes, libros en tu poder, devoluciones e historial.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mp-cuerpo">
+
+                        <div class="filtros-historial" id="filtrosPedidos" role="group" aria-label="Filtrar pedidos">
+                            <button type="button" class="activo" data-filtro="todos" aria-pressed="true">Todos <span>0</span></button>
+                            <button type="button" data-filtro="reservas" aria-pressed="false">Reservas <span>0</span></button>
+                            <button type="button" data-filtro="en_curso" aria-pressed="false">En curso <span>0</span></button>
+                            <button type="button" data-filtro="devueltos" aria-pressed="false">Devueltos <span>0</span></button>
+                            <button type="button" data-filtro="atrasos" aria-pressed="false">Con atraso <span>0</span></button>
+                        </div>
+
+                        <ul class="lista-prestamos" id="listaPedidos" aria-live="polite">
+                            <li class="lista-vacia">Cargando tus pedidos...</li>
+                        </ul>
+
+                    </div>
+
+                </section>
+
+            </main>
+
+        </div>
+
+    </div>
+
+
+    <!-- DIÁLOGO: CONFIRMAR PEDIDO -->
+    <dialog id="dialogoPedido" class="dialogo-reserva" aria-labelledby="tituloDialogoPedido">
+        <form id="formularioPedido" class="dialogo-reserva-contenido" method="dialog">
+
+            <div class="dialogo-reserva-cabecera">
+                <div>
+                    <h2 id="tituloDialogoPedido">Pedir un libro</h2>
+                    <p>Confirmá la cantidad y la fecha estimada de devolución.</p>
+                </div>
+                <button type="button" class="boton-icono" id="btnCerrarDialogoPedido" aria-label="Cerrar ventana">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+
+            <div class="dialogo-reserva-cuerpo">
+                <input type="hidden" name="libro_id" id="pedidoLibroId">
+
+                <div class="dialogo-campo">
+                    <label for="pedidoTitulo">Libro seleccionado</label>
+                    <input type="text" id="pedidoTitulo" readonly>
+                </div>
+
+                <div class="dialogo-campo">
+                    <label for="pedidoCantidad">Cantidad</label>
+                    <input type="number" name="cantidad" id="pedidoCantidad" min="1" step="1" value="1" required>
+                    <small id="pedidoStock" class="mp-ayuda">—</small>
+                </div>
+
+                <div class="dialogo-campo">
+                    <label for="pedidoFecha">Fecha estimada de devolución</label>
+                    <input type="date" name="fecha_devolucion" id="pedidoFecha" required>
+                </div>
+
+                <div class="dialogo-reserva-info">
+                    <i data-lucide="info"></i>
+                    <span>Tu pedido quedará en estado <strong>Pendiente</strong>. La biblioteca lo confirma y después lo retirás por el mostrador.</span>
+                </div>
+
+                <p id="errorPedido" class="mp-error" role="alert" hidden></p>
+            </div>
+
+            <div class="dialogo-reserva-acciones">
+                <button type="button" class="boton-secundario" id="btnCancelarDialogoPedido">Cancelar</button>
+                <button type="submit" class="boton-principal" id="btnConfirmarPedido">
+                    <i data-lucide="check"></i>
+                    <span>Confirmar pedido</span>
+                </button>
+            </div>
+
+        </form>
+    </dialog>
+
+    <!-- AVISO FLOTANTE -->
+    <div id="avisoFlotante" class="aviso-flotante" role="status" aria-live="polite" hidden></div>
+
+
+    <!-- Sesión y encabezado + lógica de la página -->
+    <script type="module" src="js/sesion.js"></script>
+    <script type="module" src="js/mis-prestamos.js"></script>
+
+    <!-- PWA: registro del Service Worker y botón "Instalar app" -->
+    <script src="js/pwa.js"></script>
+
+    <script>
+        window.lucide?.createIcons();
+    </script>
+
+</body>
+
+</html>
